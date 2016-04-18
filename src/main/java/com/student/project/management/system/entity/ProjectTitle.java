@@ -18,7 +18,7 @@ public class ProjectTitle implements Serializable{
 	private Project project;
 
 	@ManyToOne
-	private Topic topic;
+	private ProjectTopic topic;
 
 	public Integer getId() {
 		return id;
@@ -36,11 +36,11 @@ public class ProjectTitle implements Serializable{
 		this.project = project;
 	}
 
-	public Topic getTopic() {
+	public ProjectTopic getTopic() {
 		return topic;
 	}
 
-	public void setTopic(Topic topic) {
+	public void setTopic(ProjectTopic topic) {
 		this.topic = topic;
 	}
 	

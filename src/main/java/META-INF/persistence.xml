@@ -14,7 +14,7 @@
 		<class>com.student.project.management.system.entity.Student</class>
 		<class>com.student.project.management.system.entity.StudentProject</class>
 		<class>com.student.project.management.system.entity.Supervisor</class>
-		<class>com.student.project.management.system.entity.Topic</class>
+		<class>com.student.project.management.system.entity.ProjectTopic</class>
 
 		<class>com.student.project.management.system.entity.sec.SystemRole</class>
 		<class>com.student.project.management.system.entity.sec.SystemUser</class>

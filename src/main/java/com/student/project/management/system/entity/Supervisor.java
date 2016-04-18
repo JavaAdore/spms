@@ -8,18 +8,17 @@ import com.student.project.management.system.entity.sec.SystemUser;
 
 @Entity
 @PrimaryKeyJoinColumn(name="ID")  
+@NamedQueries({ @NamedQuery(name = "Supervisor.findAll", query = "select model FROM Supervisor model")})
 public class Supervisor extends SystemUser implements Serializable {
-
-	
 	private static final long serialVersionUID = 1L;
-
 	
-	
+//	id (must be unique), name, surname, department, email address (must be validated), telephone number.
 	
 	private String department;
-	@Column(name = "telephone_number")
 	
+	@Column(name = "telephone_number")
 	private String telephoneNumber;
+	
 	public String getDepartment() {
 		return department;
 	}
@@ -33,7 +32,4 @@ public class Supervisor extends SystemUser implements Serializable {
 		this.telephoneNumber = telephoneNumber;
 	}
 	
-	
-	
-
 }
