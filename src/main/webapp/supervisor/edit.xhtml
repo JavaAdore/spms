@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+	<p:dialog dynamic="true" id="editGameDialog" header="#{msgsTou.editGame}" widgetVar="editGameDialogWidget" modal="true" 
+		showEffect="fade" hideEffect="fade" resizable="false" style="width: 60%;">
+		<h:form id="editGameForm">
+			<p:messages id="msgs" escape="false" style="white-space: pre;" />
+			<p:panelGrid id="createGamePanelGrid" columns="2">
+				<h:outputText value="#{msgsTou.name}" />
+				<p:inputText id="name" value="#{tourismPOIGameAdminView.selectedPoiGame.name}" styleClass="long" required="true" requiredMessage="#{msgsTou.name}: #{msgs.emptyValue}" />
+				
+				<h:outputText value="#{msgsTou.description}" />
+				<p:inputTextarea id="description" value="#{tourismPOIGameAdminView.selectedPoiGame.description}" styleClass="long" />
+				
+				<h:outputText value="#{msgsTou.startDate}" />
+				<p:calendar id="startDate" value="#{tourismPOIGameAdminView.selectedPoiGame.startDate}" pattern="MM/dd/yyyy"/>
+				
+				<h:outputText value="msgsTou.endDate" />
+				<p:calendar id="endDate" value="#{tourismPOIGameAdminView.selectedPoiGame.endDate}" pattern="MM/dd/yyyy"/>
+				
+				<h:outputLabel for="pois" value="ALL POIs" />
+				<p:selectCheckboxMenu id="pois" label="***** POIs *****" value="#{tourismPOIGameAdminView.selectedPoisIds}" layout="responsive" 
+					filter="true" filterMatchMode="startsWith" panelStyle="width:40%"  styleClass="long" >
+					<f:selectItems value="#{tourismPOIGameAdminView.pois}" var="poi" itemLabel="#{poi.name}" itemValue="#{poi.id}" />
+				</p:selectCheckboxMenu>
+<!-- 				<p:selectCheckboxMenu id="pois" label="***** POIs *****" value="#{tourismPOIGameAdminView.selectedPoiGame.pois}" layout="responsive"  -->
+<!-- 					filter="true" filterMatchMode="startsWith" panelStyle="width:40%"  styleClass="long" converter="#{tourismPOIConverter}"> -->
+<!-- 					<f:selectItems value="#{tourismPOIGameAdminView.pois}" var="poi" itemLabel="#{poi.name}" itemValue="#{poi}" /> -->
+<!-- 				</p:selectCheckboxMenu> -->
+			</p:panelGrid>
+			<p />
+			<center>
+				<p:commandButton value="#{msgsTou.edit}" title="#{msgs.edit}" actionListener="#{tourismPOIGameAdminView.saveEditsOnSelectedPoiGame()}" update="@form gameListDataTable"
+					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('editGameDialogWidget').hide();" />
+			</center>
+		</h:form>
+	</p:dialog>
+	
+</ui:composition>

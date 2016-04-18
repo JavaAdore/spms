@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+	<p:dialog dynamic="true" id="createGameDialog" header="#{msgsTou.newGame}" widgetVar="createGameDialogWidget" modal="true" 
+		showEffect="fade" hideEffect="fade" resizable="false" style="width: 60%;">
+		<h:form id="createGameForm">
+			<p:messages id="msgs" escape="false" style="white-space: pre;" />
+			<p:panelGrid id="createGamePanelGrid" columns="2">
+				<h:outputText value="#{msgsTou.name}" />
+				<p:inputText id="name" value="#{tourismPOIGameAdminView.newPoiGame.name}" styleClass="long" required="true" requiredMessage="#{msgsTou.name}: #{msgs.emptyValue}" />
+				
+				<h:outputText value="#{msgsTou.description}" />
+				<p:inputTextarea id="description" value="#{tourismPOIGameAdminView.newPoiGame.description}" styleClass="long" />
+				
+				<h:outputText value="#{msgsTou.startDate}" />
+				<p:calendar id="startDate" value="#{tourismPOIGameAdminView.newPoiGame.startDate}" pattern="MM/dd/yyyy"/>
+				
+				<h:outputText value="#{msgsTou.endDate}" />
+				<p:calendar id="endDate" value="#{tourismPOIGameAdminView.newPoiGame.endDate}" pattern="MM/dd/yyyy"/>
+			</p:panelGrid>
+			<p />
+			<center>
+				<p:commandButton value="#{msgsTou.create}" title="#{msgs.create}" actionListener="#{tourismPOIGameAdminView.createNewGame()}" update="@form gameListDataTable"
+					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('createGameDialogWidget').hide();" />
+			</center>
+		</h:form>
+	</p:dialog>
+	
+</ui:composition>

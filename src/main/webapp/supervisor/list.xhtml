@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+<!-- 	<p:confirmDialog dynamic="true" id="deleteGameDialog" widgetVar="deleteGameDialogWidget" header="#{msgs.areYouSure}"> -->
+<!-- 		<f:facet name="message"> -->
+<!-- 			<h:outputText value="#{msgsCog.pleaseConfirmYouWantToDelete} #{tourismPOIGameAdminView.selectedPoiGame.name}" /> -->
+<!-- 		</f:facet> -->
+<!-- 		<h:form id="deleteGameForm"> -->
+<!-- 			<p:commandButton value="#{msgs.yes}" icon="ui-icon-check" actionListener="#{tourismPOIGameAdminView.deleteSelectedPoiGame}" -->
+<!-- 				oncomplete="PF('deleteGameDialogWidget').hide();" update="gameListDataTable" /> -->
+<!-- 			<p:commandButton value="#{msgs.no}" icon="ui-icon-close" onclick="PF('deleteGameDialogWidget').hide();" /> -->
+<!-- 		</h:form> -->
+<!-- 	</p:confirmDialog> -->
+	
+	<p:dataTable id="supervisorsDataTable" value="#{supervisorManagedView.supervisors}" var="supervisor" emptyMessage="No Results Found" rows="10" 
+		paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+		<f:facet name="header">
+			<h:outputText value="Supervisors" />
+		</f:facet>
+		<p:column headerText="#{msgsTou.name}" width="350">
+			<p:commandLink value="#{game.name}" actionListener="#{tourismPOIGameAdminView.setSelectedPoiGame(game)}" oncomplete="PF('editGameDialogWidget').show()"
+				update="editGameForm" />
+		</p:column>
+		<p:column headerText="#{msgsTou.startDate}" width="125">
+			<h:outputText value="#{game.startDate}">
+				<f:convertDateTime pattern="MM/dd/yyyy HH:mm" />
+			</h:outputText>
+		</p:column>
+		<p:column headerText="#{msgsTou.endDate}" width="125">
+			<h:outputText value="#{game.endDate}">
+				<f:convertDateTime pattern="MM/dd/yyyy HH:mm" />
+			</h:outputText>
+		</p:column>
+		<p:column headerText="Description">
+			<h:outputText value="#{game.description}" />
+		</p:column>
+		<p:column headerText="POIs" width="70">
+			<center><h:outputText value="#{game.pois.size()}" /></center>
+		</p:column>
+		
+		<p:column width="70" >
+			<f:facet name="header">
+				<p:commandButton id="createButton" icon="ui-icon-plus" title="#{msgsTou.create}" actionListener="#{tourismPOIGameAdminView.beforeCreateNewGame()}"
+					oncomplete="PF('createGameDialogWidget').show()" update="createGameDialog" />
+			</f:facet>
+			<center>
+				<p:commandButton id="deleteButton" icon="ui-icon-trash" title="#{msgsTou.delete}" actionListener="#{tourismPOIGameAdminView.setSelectedPoiGame(game)}"
+ 					oncomplete="PF('deleteGameDialogWidget').show()" update="deleteGameDialog" />
+			</center>
+		</p:column>
+				
+	</p:dataTable>
+	
+</ui:composition>
