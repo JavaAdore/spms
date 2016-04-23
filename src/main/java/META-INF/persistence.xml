@@ -1,32 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.0"
-	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
-        http://java.sun.com/xml/ns/persistence
-        http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+	version="2.1">
 	<persistence-unit name="database" transaction-type="JTA">
-
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		
 		<jta-data-source>jdbc/WebappsDB</jta-data-source>
 
-		<class>com.student.project.management.system.entity.Project</class>
-		<class>com.student.project.management.system.entity.ProjectStatus</class>
-		<class>com.student.project.management.system.entity.ProjectTitle</class>
-		<class>com.student.project.management.system.entity.Student</class>
-		<class>com.student.project.management.system.entity.StudentProject</class>
-		<class>com.student.project.management.system.entity.Supervisor</class>
-		<class>com.student.project.management.system.entity.ProjectTopic</class>
-
-		<class>com.student.project.management.system.entity.sec.SystemRole</class>
-		<class>com.student.project.management.system.entity.sec.SystemUser</class>
-		<class>com.student.project.management.system.entity.sec.SystemUserGroup</class>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 
 		<properties>
 			<property name="eclipselink.ddl-generation" value="create-tables" />
 
-			<property name="javax.persistence.schema-generation.database.action"
-				value="create" />
-			<property name="eclipselink.ddl-generation.output-mode"
-				value="database" />
+			<property name="javax.persistence.schema-generation.database.action" value="create" />
+			<property name="eclipselink.ddl-generation.output-mode" value="database" />
 
 
 		</properties>
