@@ -13,29 +13,26 @@
 <!-- 	</p:confirmDialog> -->
 	
 	<p:dataTable id="supervisorsDataTable" value="#{supervisorManagedView.supervisors}" var="supervisor" emptyMessage="No Results Found" rows="10" 
-		paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
-		<f:facet name="header">
+		paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" style="width: 93%">
+		<f:facet name="header" >
 			<h:outputText value="Supervisors" />
 		</f:facet>
-		<p:column headerText="#{msgsTou.name}" width="350">
+		<p:column headerText="#" width="350">
 			<p:commandLink value="#{game.name}" actionListener="#{tourismPOIGameAdminView.setSelectedPoiGame(game)}" oncomplete="PF('editGameDialogWidget').show()"
 				update="editGameForm" />
 		</p:column>
-		<p:column headerText="#{msgsTou.startDate}" width="125">
+		<p:column headerText="" width="125">
 			<h:outputText value="#{game.startDate}">
 				<f:convertDateTime pattern="MM/dd/yyyy HH:mm" />
 			</h:outputText>
 		</p:column>
-		<p:column headerText="#{msgsTou.endDate}" width="125">
+		<p:column headerText="" width="125">
 			<h:outputText value="#{game.endDate}">
 				<f:convertDateTime pattern="MM/dd/yyyy HH:mm" />
 			</h:outputText>
 		</p:column>
 		<p:column headerText="Description">
 			<h:outputText value="#{game.description}" />
-		</p:column>
-		<p:column headerText="POIs" width="70">
-			<center><h:outputText value="#{game.pois.size()}" /></center>
 		</p:column>
 		
 		<p:column width="70" >

@@ -4,6 +4,15 @@
 		<title>Supervisors</title>
 	</ui:define>
 	
+	<ui:define name="path">
+		<h:form prependId="false">
+			<p:breadCrumb id="path" style="width:91%;">
+				<p:menuitem value="Home" url="/" />
+				<p:menuitem value="Supervisor" url="/supervisor" />
+			</p:breadCrumb>
+		</h:form>
+	</ui:define>
+	
 	<ui:define name="content">
 		
 		<ui:include src="list.xhtml" />

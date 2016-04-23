@@ -14,11 +14,11 @@ import com.spms.entity.Supervisor;
 import com.spms.service.SupervisorService;
 
 @Stateless
-//@TransactionManagement(TransactionManagementType.CONTAINER)
-//@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@TransactionManagement(TransactionManagementType.CONTAINER)
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class SupervisorServiceImpl implements SupervisorService {
 
-  @PersistenceContext
+  @PersistenceContext(unitName="database")
   EntityManager em;
 
   @SuppressWarnings("unchecked")
