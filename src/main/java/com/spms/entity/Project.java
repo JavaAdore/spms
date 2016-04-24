@@ -13,7 +13,7 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({ @NamedQuery(name = "Project.findAll", query = "SELECT model FROM Project model"),
-	@NamedQuery(name = "ProjectTopic.findBySupervisorId", query = "SELECT model FROM Project model WHERE model.supervisor.supervisorId = :supervisorId") })
+	@NamedQuery(name = "Project.findBySupervisorId", query = "SELECT model FROM Project model WHERE model.supervisor.supervisorId = :supervisorId") })
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Project implements Serializable {
 
