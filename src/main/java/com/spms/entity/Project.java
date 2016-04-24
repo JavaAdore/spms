@@ -8,8 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({ @NamedQuery(name = "Project.findAll", query = "SELECT model FROM Project model"),
+	@NamedQuery(name = "ProjectTopic.findBySupervisorId", query = "SELECT model FROM Project model WHERE model.supervisor.supervisorId = :supervisorId") })
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Project implements Serializable {
 
