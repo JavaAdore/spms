@@ -7,53 +7,65 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Project implements Serializable {
-  
-  private static final long serialVersionUID = 1L;
-  
-//  Project: title, description, required skills (e.g. Java, J2EE etc.), Status (e.g. Accepted, Proposed, Available).
 
-  @Id
-  @GeneratedValue
-  private Integer id;
-  private String title;
-  private String description;
-  private String requiredSkills;
+	private static final long serialVersionUID = 1L;
 
+	// Project: title, description, required skills (e.g. Java, J2EE etc.),
+	// Status (e.g. Accepted, Proposed, Available).
 
-  public Integer getId() {
-    return id;
-  }
+	@Id
+	@GeneratedValue
+	private Integer id;
+	private String title;
+	private String description;
+	private String requiredSkills;
+	
+	@ManyToOne
+	private Supervisor supervisor;
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+	public Integer getId() {
+		return id;
+	}
 
-  public String getTitle() {
-    return title;
-  }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
+	public String getTitle() {
+		return title;
+	}
 
-  public String getDescription() {
-    return description;
-  }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+	public String getDescription() {
+		return description;
+	}
 
-  public String getRequiredSkills() {
-    return requiredSkills;
-  }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-  public void setRequiredSkills(String requiredSkills) {
-    this.requiredSkills = requiredSkills;
-  }
+	public String getRequiredSkills() {
+		return requiredSkills;
+	}
+
+	public void setRequiredSkills(String requiredSkills) {
+		this.requiredSkills = requiredSkills;
+	}
+	
+	public Supervisor getSupervisor() {
+		return supervisor;
+	}
+	
+	public void setSupervisor(Supervisor supervisor) {
+		this.supervisor = supervisor;
+	}
 
 }

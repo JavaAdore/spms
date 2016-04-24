@@ -9,23 +9,19 @@ import javax.faces.bean.ViewScoped;
 
 import com.spms.service.TestService;
 
-
 @ManagedBean
 @ViewScoped
-public class TestManagedBean  implements Serializable{
+public class TestManagedBean implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L; 
+	private static final long serialVersionUID = 1L;
 
-	
 	@EJB
 	TestService testService;
-	
-	
-	public void test()
-	{
+
+	public void test() {
 		testService.test();
 	}
 }

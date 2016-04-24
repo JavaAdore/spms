@@ -2,90 +2,117 @@ package com.spms.entity.sec;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+//import javax.persistence.JoinColumn;
+//import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Pattern;
 
 @Entity
+@NamedQueries({ @NamedQuery(name = "SystemUser.findAll", query = "SELECT model FROM SystemUser model"),
+	@NamedQuery(name = "SystemUser.findByUsername", query = "SELECT model FROM SystemUser model WHERE model.username = :username")})
 @Table(name = "SYSTEMUSER")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class SystemUser implements Serializable {
 
-  private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-  @Id
-  @Column(name = "ID")
-  private String id;
-  
-  private String name;
-  
-  private String surname;
+	@Id
+	@GeneratedValue
+	private Integer id;
 
-  @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*", message = "Invalid Email.")
-  @Column(name = "USER_NAME")
-  private String email;
+	private String name;
 
-  @Column(name = "USERPASSWORD")
-  private String password;
-  
-  @ManyToOne
-  @JoinColumn(name = "GROUP_ID")
-  private SystemRole role;
-  
-  public String getId() {
-    return id;
-  }
-  
-  public void setId(String id) {
-    this.id = id;
-  }
-  
-  public String getName() {
-    return name;
-  }
-  
-  public void setName(String name) {
-    this.name = name;
-  }
-  
-  public String getSurname() {
-    return surname;
-  }
-  
-  public void setSurname(String surname) {
-    this.surname = surname;
-  }
+	private String surname;
 
-  public String getEmail() {
-    return email;
-  }
+	@Basic(optional = false)
+	private String email;
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+	@Basic(optional = false)
+	@Column(name = "USER_NAME")
+	private String username;
 
-  public String getPassword() {
-    return password;
-  }
+	@Basic(optional = false)
+	@Column(name = "USERPASSWORD")
+	private String password;
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+	public SystemUser() {
+	}
 
-  public SystemRole getRole() {
-    return role;
-  }
+	// @ManyToOne
+	// @JoinColumn(name = "GROUP_ID")
+	// private SystemRole role;
 
-  public void setRole(SystemRole role) {
-    this.role = role;
-  }
-  
-  public SystemUser() {}
+	public SystemUser(String name, String surname, String email, String username, String password) {
+		super();
+		this.name = name;
+		this.surname = surname;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	// public SystemRole getRole() {
+	// return role;
+	// }
+	//
+	// public void setRole(SystemRole role) {
+	// this.role = role;
+	// }
 
 }

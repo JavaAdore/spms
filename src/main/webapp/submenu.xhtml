@@ -1,6 +1,14 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
-	<p:submenu label="Tourism">
-		<p:menuitem value="Test1" url="#" />
-		<p:menuitem value="Test2" url="#" />
+	
+	<p:submenu label="Admin">
+		<p:menuitem value="Admins" url="/admin" />
+		<p:menuitem value="Supervisors" url="/admin/supervisors.xhtml" />
+		<p:menuitem value="Students" url="/admin/students.xhtml" />
+		<p:menuitem value="Project Topics" url="/admin/projectTopics.xhtml" />
 	</p:submenu>
+	
+	<p:submenu label="Supervisors">
+		<p:menuitem value="Supervisor" url="/supervisor" />
+	</p:submenu>
+	
 </ui:composition>

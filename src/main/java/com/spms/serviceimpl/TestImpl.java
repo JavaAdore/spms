@@ -16,17 +16,17 @@ import com.spms.service.TestService;
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class TestImpl implements TestService {
 
-	@PersistenceContext(unitName="database")
+	@PersistenceContext(unitName = "database")
 	EntityManager em;
-	
-	@Override 
+
+	@Override
 	public void test() {
-		
+
 		Query query = em.createQuery("select o from Student o");
-		
+
 		System.out.println("query.getResultList().size() = " + query.getResultList().size());
 		System.out.println("+++++++Done+++++++");
-		
+
 	}
-  
+
 }

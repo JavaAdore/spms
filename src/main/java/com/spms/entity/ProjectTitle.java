@@ -8,15 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class ProjectTitle implements Serializable{
-
+public class ProjectTitle implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue
 	private Integer id;
-	
+
 	@ManyToOne
 	private Project project;
 
@@ -46,7 +45,5 @@ public class ProjectTitle implements Serializable{
 	public void setTopic(ProjectTopic topic) {
 		this.topic = topic;
 	}
-	
-	
 
 }

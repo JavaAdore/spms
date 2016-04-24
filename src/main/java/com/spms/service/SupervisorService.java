@@ -5,5 +5,19 @@ import java.util.List;
 import com.spms.entity.Supervisor;
 
 public interface SupervisorService {
-  List<Supervisor> findAll();
+
+	Supervisor create(Supervisor supervisor);
+
+	Supervisor find(Integer id);
+
+	Supervisor update(Supervisor supervisor);
+
+	void delete(Supervisor supervisor);
+
+	List<Supervisor> getAllSupervisors();
+	
+	Supervisor findBySupervisorId(String supervisorId);
+	
+	Supervisor findByUsername(String username);
+
 }

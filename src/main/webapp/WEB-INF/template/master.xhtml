@@ -15,6 +15,7 @@
 <f:view contentType="text/html">
 
 	<h:body style="padding:0px; margin:0px;">
+		<p:growl id="growl" autoUpdate="true" />
 		<div style="height: 15%; background-color: #232323;">
 			<ui:include src="header.xhtml" />
 		</div>
@@ -25,16 +26,12 @@
 					<p:menubar style="width:90%; padding-top: 15px; margin-top: 15px;">
 						
 						<ui:include src="/submenu.xhtml" />
-
-						<p:submenu label="Pages" style="padding-left: 10px;">
-							<p:menuitem value="List Pages" url="#" />
-							<p:menuitem value="Add Pages" url="#" />
-							<p:menuitem value="More Actions" url="#" />
-						</p:submenu>
-						
+												
 					</p:menubar>
 				</h:form>
+				<br />
 				<ui:insert name="path" />
+				<br />
 			</div>
 		</center>
 		<div style="height: 70%; min-height: 410px;">
