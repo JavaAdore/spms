@@ -1,18 +1,19 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>Login</title>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">  
+    <h:head>     
+          <title>Login</title>
     </h:head>
     <body>
         <h2>Hello, please log in:</h2>
         <h:form>
-            Username: <h:inputText value="#{LoginManagerView.username}"/>
-            Password: <h:inputSecret value="#{LoginManagerView.password}"/>
+            Username: <p:inputText value="#{loginBean.userName}"/>
+            Password: <p:password value="#{loginBean.password}"/>
             <br/>
-            <h:commandButton value="Submit" action="#{LoginManagerView.login()}"/>
-            <h:commandButton value="Reset" type="reset"/>
+            <p:commandButton value="Submit" actionListener="#{loginBean.login()}"/>
+            <p:commandButton value="Reset" type="reset"/>
         </h:form>
     </body>
 </html>
