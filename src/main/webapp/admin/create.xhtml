@@ -1,0 +1,145 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<!-- 	Start Admin -->
+	<p:dialog dynamic="true" id="createAdminDialog" header="#{msgs.newAdmin}" widgetVar="createAdminDialogWidget" modal="true" 
+		showEffect="fade" hideEffect="fade" resizable="false" style="width: 60%;">
+		<h:form id="createAdminForm">
+			<p:messages id="msgs" escape="false" style="white-space: pre;" />
+			<p:panelGrid id="createAdminPanelGrid" columns="2">
+				<h:outputText value="#{msgs.name}" />
+				<p:inputText id="name" value="#{adminManagerView.newAdmin.name}" required="true" requiredMessage="#{msgs.name}: #{msgs.emptyValue}" style="width: 250px;"/>
+				
+				<h:outputText value="#{msgs.surname}" />
+				<p:inputText id="surname" value="#{adminManagerView.newAdmin.surname}" style="width: 250px;"/>
+				
+				<h:outputText value="#{msgs.email}" />
+				<p:inputText id="email" value="#{adminManagerView.newAdmin.email}" required="true" requiredMessage="#{msgs.email}: #{msgs.emptyValue}" 
+					validatorMessage="#{msgs.email}: #{msgs.notValidEmail}" style="width: 250px;">
+					<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
+				</p:inputText>
+				
+				<h:outputText value="#{msgs.username}" />
+				<p:inputText id="username" value="#{adminManagerView.newAdmin.username}" required="true" requiredMessage="#{msgs.username}: #{msgs.emptyValue}" style="width: 250px;"/>
+				
+				<h:outputText value="#{msgs.password}" />
+				<p:inputText id="password" value="#{adminManagerView.newAdmin.password}" required="true" requiredMessage="#{msgs.password}: #{msgs.emptyValue}" style="width: 250px;"/>
+				
+			</p:panelGrid>
+			<p />
+			<center>
+				<p:commandButton value="#{msgs.create}" title="#{msgs.create}" actionListener="#{adminManagerView.createNewAdmin()}" update="@form adminsDataTable growl"
+					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('createAdminDialogWidget').hide();" ignoreAutoUpdate="true"/>
+			</center>
+		</h:form>
+	</p:dialog>
+	<!-- 	End Admin -->
+	
+	
+	<!-- 	Start Supervisor -->
+	<p:dialog dynamic="true" id="createSupervisorDialog" header="#{msgs.newSupervisor}" widgetVar="createSupervisorDialogWidget" modal="true" 
+		showEffect="fade" hideEffect="fade" resizable="false" style="width: 60%;">
+		<h:form id="createSupervisorForm">
+			<p:messages id="msgs" escape="false" style="white-space: pre;" />
+			<p:panelGrid id="createSupervisorPanelGrid" columns="2">
+				<h:outputText value="#{msgs.id}" />
+				<p:inputText id="id" value="#{supervisorManagerView.newSupervisor.supervisorId}" required="true" requiredMessage="#{msgs.id}: #{msgs.emptyValue}" style="width: 250px;"/>
+				
+				<h:outputText value="#{msgs.name}" />
+				<p:inputText id="name" value="#{supervisorManagerView.newSupervisor.name}" required="true" requiredMessage="#{msgs.name}: #{msgs.emptyValue}" style="width: 250px;"/>
+				
+				<h:outputText value="#{msgs.surname}" />
+				<p:inputText id="surname" value="#{supervisorManagerView.newSupervisor.surname}" style="width: 250px;"/>
+				
+				<h:outputText value="#{msgs.email}" />
+				<p:inputText id="email" value="#{supervisorManagerView.newSupervisor.email}" required="true" requiredMessage="#{msgs.email}: #{msgs.emptyValue}" 
+					validatorMessage="#{msgs.email}: #{msgs.notValidEmail}" style="width: 250px;">
+					<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
+				</p:inputText>
+				
+				<h:outputText value="#{msgs.telephoneNumber}" />
+				<p:inputText id="telephoneNumber" value="#{supervisorManagerView.newSupervisor.telephoneNumber}" style="width: 250px;"/>
+				
+				<h:outputText value="#{msgs.department}" />
+				<p:inputText id="department" value="#{supervisorManagerView.newSupervisor.department}" style="width: 250px;"/>
+				
+				<h:outputText value="#{msgs.username}" />
+				<p:inputText id="username" value="#{supervisorManagerView.newSupervisor.username}" required="true" requiredMessage="#{msgs.username}: #{msgs.emptyValue}" style="width: 250px;"/>
+				
+				<h:outputText value="#{msgs.password}" />
+				<p:inputText id="password" value="#{supervisorManagerView.newSupervisor.password}" required="true" requiredMessage="#{msgs.password}: #{msgs.emptyValue}" style="width: 250px;"/>
+				
+			</p:panelGrid>
+			<p />
+			<center>
+				<p:commandButton value="#{msgs.create}" title="#{msgs.create}" actionListener="#{supervisorManagerView.createNewSupervisor()}" update="@form supervisorsDataTable growl"
+					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('createSupervisorDialogWidget').hide();" ignoreAutoUpdate="true"/>
+			</center>
+		</h:form>
+	</p:dialog>
+	<!-- 	End Supervisor -->
+	
+	
+	<!-- 	Start user -->
+	<p:dialog dynamic="true" id="createStudentDialog" header="#{msgs.newStudent}" widgetVar="createStudentDialogWidget" modal="true" 
+		showEffect="fade" hideEffect="fade" resizable="false" style="width: 60%;">
+		<h:form id="createStudentForm">
+			<p:messages id="msgs" escape="false" style="white-space: pre;" />
+			<p:panelGrid id="createStudentPanelGrid" columns="2">
+				<h:outputText value="#{msgs.id}" />
+				<p:inputText id="id" value="#{studentManagerView.newStudent.studentId}" required="true" requiredMessage="#{msgs.id}: #{msgs.emptyValue}" style="width: 250px;"/>
+				
+				<h:outputText value="#{msgs.name}" />
+				<p:inputText id="name" value="#{studentManagerView.newStudent.name}" required="true" requiredMessage="#{msgs.name}: #{msgs.emptyValue}" style="width: 250px;"/>
+				
+				<h:outputText value="#{msgs.surname}" />
+				<p:inputText id="surname" value="#{studentManagerView.newStudent.surname}" style="width: 250px;"/>
+				
+				<h:outputText value="#{msgs.email}" />
+				<p:inputText id="email" value="#{studentManagerView.newStudent.email}" required="true" requiredMessage="#{msgs.email}: #{msgs.emptyValue}" 
+					validatorMessage="#{msgs.email}: #{msgs.notValidEmail}" style="width: 250px;">
+					<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
+				</p:inputText>
+				
+				<h:outputText value="#{msgs.course}" />
+				<p:inputText id="course" value="#{studentManagerView.newStudent.course}" style="width: 250px;"/>
+				
+				<h:outputText value="#{msgs.username}" />
+				<p:inputText id="username" value="#{studentManagerView.newStudent.username}" required="true" requiredMessage="#{msgs.username}: #{msgs.emptyValue}" style="width: 250px;"/>
+				
+				<h:outputText value="#{msgs.password}" />
+				<p:inputText id="password" value="#{studentManagerView.newStudent.password}" required="true" requiredMessage="#{msgs.password}: #{msgs.emptyValue}" style="width: 250px;"/>
+				
+			</p:panelGrid>
+			<p />
+			<center>
+				<p:commandButton value="#{msgs.create}" title="#{msgs.create}" actionListener="#{studentManagerView.createNewStudent()}" update="@form studentsDataTable growl"
+					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('createStudentDialogWidget').hide();" ignoreAutoUpdate="true"/>
+			</center>
+		</h:form>
+	</p:dialog>
+	<!-- 	End user -->
+	
+	<!-- 	Start project Topics -->
+	<p:dialog dynamic="true" id="createProjectTopicDialog" header="#{msgs.newStudent}" widgetVar="createProjectTopicDialogWidget" modal="true" 
+		showEffect="fade" hideEffect="fade" resizable="false" style="width: 60%;">
+		<h:form id="createProjectTopicForm">
+			<p:messages id="msgs" escape="false" style="white-space: pre;" />
+			<p:panelGrid id="createProjectTopicPanelGrid" columns="2">
+				<h:outputText value="#{msgs.topicTitle}" />
+				<p:inputText id="topicTitle" value="#{projectTopicManagerView.newProjectTopic.topicTitle}" required="true" requiredMessage="#{msgs.topicTitle}: #{msgs.emptyValue}" style="width: 250px;"/>
+				
+				<h:outputText value="#{msgs.topicDescription}" />
+				<p:inputTextarea id="topicDescription" value="#{projectTopicManagerView.newProjectTopic.topicDescription}" rows="8" style="width: 250px;"/>
+				
+			</p:panelGrid>
+			<p />
+			<center>
+				<p:commandButton value="#{msgs.create}" title="#{msgs.create}" actionListener="#{projectTopicManagerView.createNewProjectTopic()}" update="@form projectTopicsDataTable growl"
+					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('createProjectTopicDialogWidget').hide();" ignoreAutoUpdate="true"/>
+			</center>
+		</h:form>
+	</p:dialog>
+	<!-- 	End project Topics   -->
+	
+</ui:composition>

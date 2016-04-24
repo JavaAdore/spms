@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template/master.xhtml">
+	<ui:define name="title">
+		<title>Students</title>
+	</ui:define>
+	
+	<ui:define name="path">
+		<h:form prependId="false">
+			<p:breadCrumb id="path" style="width:91%;">
+				<p:menuitem value="Home" url="/" />
+				<p:menuitem value="Admins" url="/admin" />
+				<p:menuitem value="Students" url="/admin/students.xhtml" />
+			</p:breadCrumb>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="content">
+	
+		<ui:include src="create.xhtml" />
+		<ui:include src="edit.xhtml" />
+	
+		<p:confirmDialog dynamic="true" id="deleteStudentDialog" widgetVar="deleteStudentDialogWidget" header="#{msgs.areYouSure}">
+			<f:facet name="message">
+				<h:outputText value="#{msgs.pleaseConfirmYouWantToDelete}: #{studentManagerView.selectedStudent.username}" />
+			</f:facet>
+			<h:form id="deleteStudentForm">
+				<p:commandButton value="#{msgs.yes}" icon="ui-icon-check" actionListener="#{studentManagerView.deleteSelectedStudent()}"
+					oncomplete="PF('deleteStudentDialogWidget').hide();" update="studentsDataTable" />
+				<p:commandButton value="#{msgs.no}" icon="ui-icon-close" onclick="PF('deleteStudentDialogWidget').hide();" />
+			</h:form>
+		</p:confirmDialog>
+		
+		<p:dataTable id="studentsDataTable" value="#{studentManagerView.studentList}" var="student" emptyMessage="#{msgs.noResultsFound}" rows="10" 
+			paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" style="width: 93%">
+			<f:facet name="header" >
+				<h:outputText value="Students" />
+			</f:facet>
+			<p:column headerText="#{msgs.id}" >
+				<p:commandLink value="#{student.studentId}" actionListener="#{studentManagerView.setSelectedStudent(student)}" oncomplete="PF('editStudentDialogWidget').show()"
+					update="editStudentDialog" />
+			</p:column>
+			<p:column headerText="#{msgs.name}" >
+				<p:commandLink value="#{student.name}" actionListener="#{studentManagerView.setSelectedStudent(student)}" oncomplete="PF('editStudentDialogWidget').show()"
+					update="editStudentDialog" />
+			</p:column>
+			<p:column headerText="Email" >
+				<h:outputText value="#{student.email}" />
+			</p:column>
+			<p:column headerText="Username" >
+				<h:outputText value="#{student.username}" />
+			</p:column>
+			<p:column headerText="Password" >
+				<h:outputText value="#{student.password}" />
+			</p:column>
+					
+			<p:column width="70" >
+				<f:facet name="header">
+					<p:commandButton id="createButton" icon="ui-icon-plus" title="#{msgs.create}" actionListener="#{studentManagerView.beforeCreateNewStudent()}"
+						oncomplete="PF('createStudentDialogWidget').show()" update="createStudentDialog" />
+				</f:facet>
+				<center>
+					<p:commandButton id="deleteButton" icon="ui-icon-trash" title="#{msgs.delete}" actionListener="#{studentManagerView.setSelectedStudent(student)}"
+	 					oncomplete="PF('deleteStudentDialogWidget').show()" update="deleteStudentDialog" />
+				</center>
+			</p:column>
+					
+		</p:dataTable>
+		
+	</ui:define>
+</ui:composition>

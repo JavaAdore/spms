@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template/master.xhtml">
+	<ui:define name="title">
+		<title>Topics</title>
+	</ui:define>
+	
+	<ui:define name="path">
+		<h:form prependId="false">
+			<p:breadCrumb id="path" style="width:91%;">
+				<p:menuitem value="Home" url="/" />
+				<p:menuitem value="Admins" url="/admin" />
+				<p:menuitem value="Project Topics" url="/admin/projectTopics.xhtml" />
+			</p:breadCrumb>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="content">
+	
+		<ui:include src="create.xhtml" />
+		<ui:include src="edit.xhtml" />
+	
+		<p:confirmDialog dynamic="true" id="deleteProjectTopicDialog" widgetVar="deleteProjectTopicDialogWidget" header="#{msgs.areYouSure}">
+			<f:facet name="message">
+				<h:outputText value="#{msgs.pleaseConfirmYouWantToDelete}: #{projectTopicManagerView.selectedProjectTopic.topicTitle}" />
+			</f:facet>
+			<h:form id="deleteProjectTopicForm">
+				<p:commandButton value="#{msgs.yes}" icon="ui-icon-check" actionListener="#{projectTopicManagerView.deleteSelectedProjectTopic()}"
+					oncomplete="PF('deleteProjectTopicDialogWidget').hide();" update="projectTopicsDataTable" />
+				<p:commandButton value="#{msgs.no}" icon="ui-icon-close" onclick="PF('deleteProjectTopicDialogWidget').hide();" />
+			</h:form>
+		</p:confirmDialog>
+		
+		<p:dataTable id="projectTopicsDataTable" value="#{projectTopicManagerView.projectTopicList}" var="projectTopic" emptyMessage="#{msgs.noResultsFound}" rows="10" 
+			paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" style="width: 93%">
+			<f:facet name="header" >
+				<h:outputText value="Topics" />
+			</f:facet>
+			<p:column headerText="#{msgs.topicTitle}" >
+				<p:commandLink value="#{projectTopic.topicTitle}" actionListener="#{projectTopicManagerView.setSelectedProjectTopic(projectTopic)}" 
+					update="editProjectTopicDialog" oncomplete="PF('editProjectTopicDialogWidget').show()" />
+			</p:column>
+			<p:column headerText="#{msgs.topicDescription}" >
+				<h:outputText value="#{projectTopic.topicDescription}" />
+			</p:column>
+								
+			<p:column width="70" >
+				<f:facet name="header">
+					<p:commandButton id="createButton" icon="ui-icon-plus" title="#{msgs.create}" actionListener="#{projectTopicManagerView.beforeCreateNewProjectTopic()}"
+						oncomplete="PF('createProjectTopicDialogWidget').show()" update="createProjectTopicDialog" />
+				</f:facet>
+				<center>
+					<p:commandButton id="deleteButton" icon="ui-icon-trash" title="#{msgs.delete}" actionListener="#{projectTopicManagerView.setSelectedProjectTopic(projectTopic)}"
+	 					oncomplete="PF('deleteProjectTopicDialogWidget').show()" update="deleteProjectTopicDialog" />
+				</center>
+			</p:column>
+					
+		</p:dataTable>
+		
+	</ui:define>
+</ui:composition>

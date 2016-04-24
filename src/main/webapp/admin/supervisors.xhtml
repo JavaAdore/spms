@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template/master.xhtml">
+	<ui:define name="title">
+		<title>Supervisors</title>
+	</ui:define>
+	
+	<ui:define name="path">
+		<h:form prependId="false">
+			<p:breadCrumb id="path" style="width:91%;">
+				<p:menuitem value="Home" url="/" />
+				<p:menuitem value="Admins" url="/admin" />
+				<p:menuitem value="Supervisors" url="/admin/supervisors.xhtml" />
+			</p:breadCrumb>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="content">
+	
+		<ui:include src="create.xhtml" />
+		<ui:include src="edit.xhtml" />
+	
+		<p:confirmDialog dynamic="true" id="deleteSupervisorDialog" widgetVar="deleteSupervisorDialogWidget" header="#{msgs.areYouSure}">
+			<f:facet name="message">
+				<h:outputText value="#{msgs.pleaseConfirmYouWantToDelete}: #{supervisorManagerView.selectedSupervisor.username}" />
+			</f:facet>
+			<h:form id="deleteSupervisorForm">
+				<p:commandButton value="#{msgs.yes}" icon="ui-icon-check" actionListener="#{supervisorManagerView.deleteSelectedSupervisor()}"
+					oncomplete="PF('deleteSupervisorDialogWidget').hide();" update="supervisorsDataTable" />
+				<p:commandButton value="#{msgs.no}" icon="ui-icon-close" onclick="PF('deleteSupervisorDialogWidget').hide();" />
+			</h:form>
+		</p:confirmDialog>
+		
+		<p:dataTable id="supervisorsDataTable" value="#{supervisorManagerView.supervisorList}" var="supervisor" emptyMessage="#{msgs.noResultsFound}" rows="10" 
+			paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" style="width: 93%">
+			<f:facet name="header" >
+				<h:outputText value="Supervisors" />
+			</f:facet>
+			<p:column headerText="#{msgs.id}" >
+				<p:commandLink value="#{supervisor.supervisorId}" actionListener="#{supervisorManagerView.setSelectedSupervisor(supervisor)}" oncomplete="PF('editSupervisorDialogWidget').show()"
+					update="editSupervisorDialog" />
+			</p:column>
+			<p:column headerText="#{msgs.name}" >
+				<p:commandLink value="#{supervisor.name}" actionListener="#{supervisorManagerView.setSelectedSupervisor(supervisor)}" oncomplete="PF('editSupervisorDialogWidget').show()"
+					update="editSupervisorDialog" />
+			</p:column>
+			<p:column headerText="Email" >
+				<h:outputText value="#{supervisor.email}" />
+			</p:column>
+			<p:column headerText="Username" >
+				<h:outputText value="#{supervisor.username}" />
+			</p:column>
+			<p:column headerText="Password" >
+				<h:outputText value="#{supervisor.password}" />
+			</p:column>
+					
+			<p:column width="70" >
+				<f:facet name="header">
+					<p:commandButton id="createButton" icon="ui-icon-plus" title="#{msgs.create}" actionListener="#{supervisorManagerView.beforeCreateNewSupervisor()}"
+						oncomplete="PF('createSupervisorDialogWidget').show()" update="createSupervisorDialog" />
+				</f:facet>
+				<center>
+					<p:commandButton id="deleteButton" icon="ui-icon-trash" title="#{msgs.delete}" actionListener="#{supervisorManagerView.setSelectedSupervisor(supervisor)}"
+	 					oncomplete="PF('deleteSupervisorDialogWidget').show()" update="deleteSupervisorDialog" />
+				</center>
+			</p:column>
+					
+		</p:dataTable>
+		
+	</ui:define>
+</ui:composition>

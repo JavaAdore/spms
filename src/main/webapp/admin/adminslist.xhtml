@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<p:confirmDialog dynamic="true" id="deleteAdminDialog" widgetVar="deleteAdminDialogWidget" header="#{msgs.areYouSure}">
+		<f:facet name="message">
+			<h:outputText value="#{msgs.pleaseConfirmYouWantToDelete}: #{adminManagerView.selectedAdmin.username}" />
+		</f:facet>
+		<h:form id="deleteAdminForm">
+			<p:commandButton value="#{msgs.yes}" icon="ui-icon-check" actionListener="#{adminManagerView.deleteSelectedAdmin}"
+				oncomplete="PF('deleteAdminDialogWidget').hide();" update="adminsDataTable" />
+			<p:commandButton value="#{msgs.no}" icon="ui-icon-close" onclick="PF('deleteAdminDialogWidget').hide();" />
+		</h:form>
+	</p:confirmDialog>
+	
+	<p:dataTable id="adminsDataTable" value="#{adminManagerView.adminList}" var="admin" emptyMessage="#{msgs.noResultsFound}" rows="10" 
+		paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" style="width: 93%">
+		<f:facet name="header" >
+			<h:outputText value="Admins" />
+		</f:facet>
+		<p:column headerText="#{msgs.name}" >
+			<p:commandLink value="#{admin.name}" actionListener="#{adminManagerView.setSelectedAdmin(admin)}" oncomplete="PF('editAdminDialogWidget').show()"
+				update="editAdminDialog" />
+		</p:column>
+		<p:column headerText="Email" >
+			<h:outputText value="#{admin.email}" />
+		</p:column>
+		<p:column headerText="Username" >
+			<h:outputText value="#{admin.username}" />
+		</p:column>
+		<p:column headerText="Password" >
+			<h:outputText value="#{admin.password}" />
+		</p:column>
+				
+		<p:column width="70" >
+			<f:facet name="header">
+				<p:commandButton id="createButton" icon="ui-icon-plus" title="#{msgs.create}" actionListener="#{adminManagerView.beforeCreateNewAdmin}"
+					oncomplete="PF('createAdminDialogWidget').show()" update="createAdminDialog" />
+			</f:facet>
+			<center>
+				<p:commandButton id="deleteButton" icon="ui-icon-trash" title="#{msgs.delete}" actionListener="#{adminManagerView.setSelectedAdmin(admin)}"
+ 					oncomplete="PF('deleteAdminDialogWidget').show()" update="deleteAdminDialog" />
+			</center>
+		</p:column>
+				
+	</p:dataTable>
+	
+</ui:composition>
