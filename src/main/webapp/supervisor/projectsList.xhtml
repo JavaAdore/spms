@@ -1,0 +1,117 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/master.xhtml">
+
+	<ui:define name="content">
+
+		<p:dialog dynamic="true" id="createProjectDialog"
+			header="#{msgs.newProject}" widgetVar="createProjectDialog"
+			modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+			style="width: 60%;">
+			<h:form id="createProjectForm">
+				<p:messages id="msgs" escape="false" style="white-space: pre;" />
+				<p:panelGrid id="createProjectPanelGrid" columns="2">
+
+
+					<h:outputText value="#{msgs.name}" />
+					<p:inputText id="name" value="#{projectsBean.project.title}"
+						required="true" requiredMessage="#{msgs.name}: #{msgs.emptyValue}"
+						style="width: 250px;" />
+
+					<h:outputText value="#{msgs.requiredSkills}" />
+					<p:inputTextarea id="surname"
+						value="#{projectsBean.project.requiredSkills}"
+						style="width: 250px;" />
+
+				</p:panelGrid>
+				<p />
+				<center>
+					<p:commandButton value="#{msgs.create}" title="#{msgs.create}"
+						actionListener="#{projectsBean.saveOrUpdateProject()}"
+						update="@form projectDataTableForm growl"
+						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('createProjectDialog').hide();"
+						ignoreAutoUpdate="true" process="@form" />
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+
+
+		<p:dialog dynamic="true" id="editProject"
+			header="#{msgs.newProject}" widgetVar="editProject" modal="true"
+			showEffect="fade" hideEffect="fade" resizable="false"
+			style="width: 60%;">
+			<h:form id="editProjectForm">
+				<p:messages id="msgs" escape="false" style="white-space: pre;" />
+				<p:panelGrid id="createProjectPanelGrid" columns="2">
+
+
+					<h:outputText value="#{msgs.name}" />
+					<p:inputText id="name" value="#{projectsBean.project.title}"
+						required="true" requiredMessage="#{msgs.name}: #{msgs.emptyValue}"
+						style="width: 250px;" />
+
+					<h:outputText value="#{msgs.requiredSkills}" />
+					<p:inputTextarea id="surname"
+						value="#{projectsBean.project.requiredSkills}"
+						style="width: 250px;" />
+
+				</p:panelGrid>
+				<p />
+				<center>
+					<p:commandButton value="#{msgs.edit}" title="#{msgs.edit}"
+						actionListener="#{projectsBean.saveOrUpdateProject()}"
+						update="@form projectDataTableForm growl"
+						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('createProjectDialog').hide();"
+						ignoreAutoUpdate="true" process="@form" />
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+
+		<h:form id="projectDataTableForm">
+			<p:dataTable id="projectDataTable"
+				value="#{projectsBean.supervisorProjects}" var="project"
+				emptyMessage="#{msgs.noResultsFound}" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				style="width: 93%">
+				<f:facet name="header">
+					<h:outputText value="project" />
+				</f:facet>
+				<p:column headerText="#{msgs.name}">
+					<p:commandLink value="#{project.title}"
+						actionListener="#{projectsBean.setProject(project)}"
+						oncomplete="PF('editProject').show()"
+						update=":editProjectForm" />
+				</p:column> 
+				<p:column headerText="Project Title">
+					<h:outputText value="#{project.title}" />
+				</p:column>
+				<p:column headerText="Project Description">
+					<h:outputText value="#{project.description}" />
+				</p:column>
+				<p:column headerText="Required Skills">
+					<h:outputText value="#{project.requiredSkills}" />
+				</p:column>
+
+				<p:column width="70">
+					<f:facet name="header">
+						<p:commandButton id="createButton" icon="ui-icon-plus"
+							title="#{msgs.create}"
+							actionListener="#{projectsBean.prepareNewProjectToCreate()}"
+							oncomplete="PF('createProjectDialog').show()"
+							update="createProjectForm" />
+					</f:facet>
+
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
