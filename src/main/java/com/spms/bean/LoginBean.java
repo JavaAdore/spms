@@ -24,9 +24,9 @@ public class LoginBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String userName = "mahmoud";
+	private String userName ;
 
-	private String password = null;      
+	private String password ;
 
 	public void login() {
 
@@ -34,12 +34,12 @@ public class LoginBean implements Serializable {
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
 		try {
-			request.login(userName, password);
+			request.login(userName, password);  
 			boolean obj = request.isUserInRole("admin");
 			System.out.println("worked fine ");
 		} catch (ServletException e) {
 			e.printStackTrace(); 
-		}  
+		}   
 
 	}
 	
@@ -66,20 +66,5 @@ public class LoginBean implements Serializable {
 		this.password = password;
 	}
 
-	public static void main(String[] args) {
-
-	}
-
-	public String hashPassword(String password)
-			throws NoSuchAlgorithmException, UnsupportedEncodingException {
-		MessageDigest md = MessageDigest.getInstance("SHA-256");
-
-		md.update("123456".getBytes("UTF-8"));
-		byte[] digest = md.digest();
-		BigInteger bigInt = new BigInteger(1, digest);
-
-		String hashedPassword = bigInt.toString(16);
-		return hashedPassword;
-	}
-
+	
 }

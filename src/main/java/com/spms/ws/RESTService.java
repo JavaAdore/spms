@@ -1,6 +1,7 @@
 package com.spms.ws;
 
 
+import javax.ejb.EJB;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -10,11 +11,14 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import com.spms.entity.Project;
+import com.spms.service.AdminService;
 
 
 @Path("/v0.1")
 public class RESTService {
 
+	@EJB
+	private AdminService adminService;
 	
 	
 	@GET
