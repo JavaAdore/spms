@@ -29,7 +29,7 @@
 			<p />
 			<center>
 				<p:commandButton value="#{msgs.edit}" title="#{msgs.edit}" actionListener="#{adminManagerView.updateSelectedAdmin()}" update="@form adminsDataTable"
-					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('editAdminDialogWidget').hide();" />
+					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('editAdminDialogWidget').hide();" process="@form"/>
 			</center>
 		</h:form>
 	</p:dialog>
@@ -73,7 +73,7 @@
 			<p />
 			<center>
 				<p:commandButton value="#{msgs.edit}" title="#{msgs.edit}" actionListener="#{supervisorManagerView.updateSelectedSupervisor()}" update="@form supervisorsDataTable"
-					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('editSupervisorDialogWidget').hide();" />
+					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('editSupervisorDialogWidget').hide();" process="@form"/>
 			</center>
 		</h:form>
 	</p:dialog>
@@ -114,7 +114,7 @@
 			<p />
 			<center>
 				<p:commandButton value="#{msgs.edit}" title="#{msgs.edit}" actionListener="#{studentManagerView.updateSelectedStudent()}" update="@form studentsDataTable"
-					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('editStudentDialogWidget').hide();" />
+					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('editStudentDialogWidget').hide();" process="@form"/>
 			</center>
 		</h:form>
 	</p:dialog>
@@ -137,7 +137,7 @@
 			<p />
 			<center>
 				<p:commandButton value="#{msgs.create}" title="#{msgs.create}" actionListener="#{projectTopicManagerView.updateSelectedProjectTopic()}" update="@form projectTopicsDataTable growl"
-					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('editProjectTopicDialogWidget').hide();" ignoreAutoUpdate="true"/>
+					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('editProjectTopicDialogWidget').hide();" ignoreAutoUpdate="true" process="@form"/>
 			</center>
 		</h:form>
 	</p:dialog>

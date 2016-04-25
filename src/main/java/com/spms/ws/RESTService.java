@@ -2,6 +2,9 @@ package com.spms.ws;
 
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -10,15 +13,19 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.spms.entity.Project;
 import com.spms.entity.Student;
 import com.spms.entity.Supervisor;
 import com.spms.service.ProjectService;
 import com.spms.service.StudentService;
 import com.spms.service.SupervisorService;
 
-
+@Stateless
 @Path("/v0.1")
 public class RESTService {
+	
+	@PersistenceContext(unitName = "database")
+	EntityManager em;
 	
 	@EJB
 	ProjectService projectService;
@@ -37,7 +44,12 @@ public class RESTService {
 		if(supervisorid.equals("all")){
 			return Response.status(Status.OK).entity(projectService.getAllProjects()).build();
 		} else{
-			return Response.status(Status.OK).entity(projectService.findBySupervisorId(supervisorid)).build();
+			Project project1 = new Project();
+			project1.setId(1);
+			project1.setTitle("PROJECT_1 Title");
+			project1.setDescription("PROJECT_1 Desciption");
+			return Response.status(Status.OK).entity(project1).build();
+//			return Response.status(Status.OK).entity(projectService.findBySupervisorId(supervisorid)).build();
 		}
 //		Project project1 = new Project();
 //		project1.setId(1);
@@ -61,7 +73,8 @@ public class RESTService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getSupervisor(@PathParam("studentid") String studentid) {
 		if(studentid.equals("all")){
-			return Response.status(Status.OK).entity(supervisorService.getAllSupervisors()).build();
+			return Response.status(Status.OK).entity(em.createNamedQuery("Supervisor.findAll").getResultList()).build();
+//			return Response.status(Status.OK).entity(supervisorService.getAllSupervisors()).build();
 		} else{
 			Supervisor supervisor1= new Supervisor();
 			supervisor1.setId(1);supervisor1.setName("Supervisor test1");

@@ -7,7 +7,7 @@
 		</f:facet>
 		<h:form id="deleteAdminForm">
 			<p:commandButton value="#{msgs.yes}" icon="ui-icon-check" actionListener="#{adminManagerView.deleteSelectedAdmin}"
-				oncomplete="PF('deleteAdminDialogWidget').hide();" update="adminsDataTable" />
+				oncomplete="PF('deleteAdminDialogWidget').hide();" update="adminsDataTable" process="@form"/>
 			<p:commandButton value="#{msgs.no}" icon="ui-icon-close" onclick="PF('deleteAdminDialogWidget').hide();" />
 		</h:form>
 	</p:confirmDialog>
