@@ -52,10 +52,10 @@ public class RESTService {
 //			return Response.status(Status.OK).entity(em.createNamedQuery("Supervisor.findAll").getResultList()).build();
 			return Response.status(Status.OK).entity(supervisorService.getAllSupervisors()).build();
 		} else{
-			Supervisor supervisor1= new Supervisor();
-			supervisor1.setId(1);supervisor1.setName("Supervisor test1");
-			supervisor1.setEmail("supervisorEmailTest1@email.com");
-			return Response.status(Status.OK).entity(supervisor1).build();
+//			Supervisor supervisor1= new Supervisor();
+//			supervisor1.setId(1);supervisor1.setName("Supervisor test1");
+//			supervisor1.setEmail("supervisorEmailTest1@email.com");
+			return Response.status(Status.OK).entity(supervisorService.findSupervisorByStudentId(studentid)).build();
 		}
 	}
 	

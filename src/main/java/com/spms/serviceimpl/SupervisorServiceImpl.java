@@ -9,6 +9,7 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import com.spms.entity.Supervisor;
 import com.spms.entity.sec.SystemUserGroup;
@@ -65,5 +66,16 @@ public class SupervisorServiceImpl implements SupervisorService {
 	public Supervisor findByUsername(String username) {
 		List<Supervisor>  resultList = em.createNamedQuery("Supervisor.findByUsername").setParameter("username", username).getResultList();
 		return resultList.isEmpty() ? null : resultList.get(0);
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public Supervisor findSupervisorByStudentId(String studentId) {
+		Query query = em.createQuery("SELECT model.supervisor FROM  StudentProject model WHERE model.student.studentId = :studentId");
+		query.setParameter("studentId", studentId);
+		List queryResult = query.getResultList();
+		if(queryResult.size()>0)
+			return (Supervisor)queryResult.get(0);
+		return null;
 	}
 }
