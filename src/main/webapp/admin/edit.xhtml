@@ -3,12 +3,12 @@
 	
 	<!-- 	Start Admin -->
 	<p:dialog dynamic="true" id="editAdminDialog" header="#{msgs.editAdmin}" widgetVar="editAdminDialogWidget" modal="true" 
-		showEffect="fade" hideEffect="fade" resizable="false" style="width: 60%;">
+		showEffect="fade" hideEffect="fade" resizable="false" style="width: 40%;">
 		<h:form id="editAdminForm">
 			<p:messages id="msgs" escape="false" style="white-space: pre;" />
 			<p:panelGrid id="editAdminPanelGrid" columns="2">
 				<h:outputText value="#{msgs.username}" />
-				<p:inputText id="username" value="#{adminManagerView.selectedAdmin.username}" readonly="true" style="width: 250px;"/>
+				<p:inputText id="username" value="#{adminManagerView.selectedAdmin.username}" disabled="true" style="width: 250px;"/>
 				
 				<h:outputText value="#{msgs.name}" />
 				<p:inputText id="name" value="#{adminManagerView.selectedAdmin.name}" required="true" requiredMessage="#{msgs.name}: #{msgs.emptyValue}" style="width: 250px;"/>
@@ -38,7 +38,7 @@
 	
 	<!-- 	Start Supervisor -->
 	<p:dialog dynamic="true" id="editSupervisorDialog" header="#{msgs.editAdmin}" widgetVar="editSupervisorDialogWidget" modal="true" 
-		showEffect="fade" hideEffect="fade" resizable="false" style="width: 60%;">
+		showEffect="fade" hideEffect="fade" resizable="false" style="width: 40%;">
 		<h:form id="editSupervisorForm">
 			<p:messages id="msgs" escape="false" style="white-space: pre;" />
 			<p:panelGrid id="editSupervisorPanelGrid" columns="2">
@@ -46,7 +46,7 @@
 				<p:inputText id="id" value="#{supervisorManagerView.selectedSupervisor.supervisorId}" required="true" requiredMessage="#{msgs.id}: #{msgs.emptyValue}" style="width: 250px;"/>
 				
 				<h:outputText value="#{msgs.username}" />
-				<p:inputText id="username" value="#{supervisorManagerView.selectedSupervisor.username}" required="true" requiredMessage="#{msgs.username}: #{msgs.emptyValue}" style="width: 250px;"/>
+				<p:inputText id="username" value="#{supervisorManagerView.selectedSupervisor.username}" disabled="true" style="width: 250px;"/>
 				
 				<h:outputText value="#{msgs.name}" />
 				<p:inputText id="name" value="#{supervisorManagerView.selectedSupervisor.name}" required="true" requiredMessage="#{msgs.name}: #{msgs.emptyValue}" style="width: 250px;"/>
@@ -82,7 +82,7 @@
 	
 	<!-- 	Start user -->
 	<p:dialog dynamic="true" id="editStudentDialog" header="#{msgs.editStudent}" widgetVar="editStudentDialogWidget" modal="true" 
-		showEffect="fade" hideEffect="fade" resizable="false" style="width: 60%;">
+		showEffect="fade" hideEffect="fade" resizable="false" style="width: 40%;">
 		<h:form id="editStudentForm">
 			<p:messages id="msgs" escape="false" style="white-space: pre;" />
 			<p:panelGrid id="editStudentPanelGrid" columns="2">
@@ -90,7 +90,7 @@
 				<p:inputText id="id" value="#{studentManagerView.selectedStudent.studentId}" required="true" requiredMessage="#{msgs.id}: #{msgs.emptyValue}" style="width: 250px;"/>
 				
 				<h:outputText value="#{msgs.username}" />
-				<p:inputText id="username" value="#{studentManagerView.selectedStudent.username}" required="true" requiredMessage="#{msgs.username}: #{msgs.emptyValue}" style="width: 250px;"/>
+				<p:inputText id="username" value="#{studentManagerView.selectedStudent.username}" disabled="true" style="width: 250px;"/>
 				
 				<h:outputText value="#{msgs.name}" />
 				<p:inputText id="name" value="#{studentManagerView.selectedStudent.name}" required="true" requiredMessage="#{msgs.name}: #{msgs.emptyValue}" style="width: 250px;"/>
@@ -123,7 +123,7 @@
 	
 	<!-- 	Start project Topics -->
 	<p:dialog dynamic="true" id="editProjectTopicDialog" header="#{msgs.newStudent}" widgetVar="editProjectTopicDialogWidget" modal="true" 
-		showEffect="fade" hideEffect="fade" resizable="false" style="width: 60%;">
+		showEffect="fade" hideEffect="fade" resizable="false" style="width: 40%;">
 		<h:form id="editProjectTopicForm">
 			<p:messages id="msgs" escape="false" style="white-space: pre;" />
 			<p:panelGrid id="editProjectTopicPanelGrid" columns="2">

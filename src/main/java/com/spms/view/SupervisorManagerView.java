@@ -13,7 +13,9 @@ import javax.faces.context.FacesContext;
 
 import com.spms.entity.Supervisor;
 import com.spms.entity.sec.SystemUser;
+import com.spms.entity.sec.SystemUserGroup;
 import com.spms.service.SupervisorService;
+import com.spms.service.SystemUserGroupService;
 import com.spms.service.SystemUserService;
 import com.spms.util.Util;
 
@@ -28,6 +30,9 @@ public class SupervisorManagerView implements Serializable {
 	
 	@EJB
 	SupervisorService supervisorService;
+	
+	@EJB
+	SystemUserGroupService systemUserGroupService;
 
 	private List<Supervisor> supervisorList;
 	private Supervisor newSupervisor;
@@ -66,6 +71,13 @@ public class SupervisorManagerView implements Serializable {
 		newSupervisor.setPassword(Util.hashPassword(newSupervisor.getPassword()));
 		newSupervisor = supervisorService.create(newSupervisor);
 		supervisorList.add(newSupervisor);
+		
+		SystemUserGroup systemUserGroup = systemUserGroupService.find(newSupervisor.getUsername(), "supervisor");
+		if(systemUserGroup == null){
+			systemUserGroup = new SystemUserGroup();
+			systemUserGroupService.create(newSupervisor.getUsername(), "supervisor");
+		}
+		
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage("Supervisor: " + newSupervisor.getUsername() + " created successfully."));
 	}
@@ -94,6 +106,7 @@ public class SupervisorManagerView implements Serializable {
 
 	public void deleteSelectedSupervisor() {
 		supervisorService.delete(selectedSupervisor);
+		systemUserGroupService.delete(selectedSupervisor.getUsername(), "supervisor");
 		supervisorList.remove(selectedSupervisor);
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage("Supervisor: " + selectedSupervisor.getUsername() + " successfully deleted."));

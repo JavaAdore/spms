@@ -13,8 +13,10 @@ import javax.faces.context.FacesContext;
 
 import com.spms.entity.Admin;
 import com.spms.entity.sec.SystemUser;
+import com.spms.entity.sec.SystemUserGroup;
 import com.spms.service.AdminService;
 import com.spms.service.SupervisorService;
+import com.spms.service.SystemUserGroupService;
 import com.spms.service.SystemUserService;
 import com.spms.util.Util;
 
@@ -32,6 +34,9 @@ public class AdminManagerView implements Serializable {
 	
 	@EJB
 	SupervisorService supervisorService;
+	
+	@EJB
+	SystemUserGroupService systemUserGroupService;
 	
 	@PostConstruct
 	public void postConstruct() {
@@ -62,6 +67,12 @@ public class AdminManagerView implements Serializable {
 		newAdmin.setPassword(Util.hashPassword(newAdmin.getPassword()));
 		newAdmin = adminService.create(newAdmin);
 		adminList.add(newAdmin);
+		
+		SystemUserGroup systemUserGroup = systemUserGroupService.find(newAdmin.getUsername(), "admin");
+		if(systemUserGroup == null){
+			systemUserGroup = new SystemUserGroup();
+			systemUserGroupService.create(newAdmin.getUsername(), "admin");
+		}
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage("Admin: " + newAdmin.getUsername() + " created successfully."));
 	}
@@ -83,6 +94,7 @@ public class AdminManagerView implements Serializable {
 
 	public void deleteSelectedAdmin() {
 		adminService.delete(selectedAdmin);
+		systemUserGroupService.delete(selectedAdmin.getUsername(), "admin");
 		adminList.remove(selectedAdmin);
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage("Admin: " + selectedAdmin.getUsername() + " successfully deleted."));
