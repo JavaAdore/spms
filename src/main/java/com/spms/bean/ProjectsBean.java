@@ -42,13 +42,30 @@ public class ProjectsBean implements Serializable {
 	}
 
 	public void prepareNewProjectToCreate() {
-		try {
-			project = new Project();
-			project.setSupervisor(supervisor);
 
+		project = new Project();
+		project.setSupervisor(supervisor);
+
+	}
+
+	public void saveOrUpdateProject() {
+
+		try {
+			if(project.getId()==null){
 			project = projectService.create(project);
+			
 
 			supervisorProjects.add(project);
+			}else
+			{
+				project = projectService.update(project);
+				refreshInstructorProjectsList();
+			}
+			
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO,
+							"Project has been created successfully", ""));
 		} catch (Exception ex) {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
