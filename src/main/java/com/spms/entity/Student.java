@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -30,6 +32,11 @@ public class Student extends SystemUser implements Serializable {
 	private String studentId;
 	
 	private String course;
+	
+	
+	@ManyToOne
+	@JoinColumn(name="project_id" , referencedColumnName = "id")
+	private Project project;
 
 	public String getStudentId() {
 		return studentId;
@@ -45,6 +52,14 @@ public class Student extends SystemUser implements Serializable {
 
 	public void setCourse(String course) {
 		this.course = course;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
 	}
 	
 }

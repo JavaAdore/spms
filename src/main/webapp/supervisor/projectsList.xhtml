@@ -1,0 +1,100 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+	
+	
+	<p:dialog dynamic="true" id="createProjectDialog" header="#{msgs.newStudent}" widgetVar="createProjectDialog" modal="true" 
+		showEffect="fade" hideEffect="fade" resizable="false" style="width: 60%;">
+		<h:form id="createStudentForm">
+<!-- 			<p:messages id="msgs" escape="false" style="white-space: pre;" /> -->
+<!-- 			<p:panelGrid id="createStudentPanelGrid" columns="2"> -->
+<!-- 				<h:outputText value="#{msgs.id}" /> -->
+<!-- 				<p:inputText id="id" value="#{studentManagerView.newStudent.studentId}" required="true" requiredMessage="#{msgs.id}: #{msgs.emptyValue}" style="width: 250px;"/> -->
+				
+<!-- 				<h:outputText value="#{msgs.name}" /> -->
+<!-- 				<p:inputText id="name" value="#{studentManagerView.newStudent.name}" required="true" requiredMessage="#{msgs.name}: #{msgs.emptyValue}" style="width: 250px;"/> -->
+				
+<!-- 				<h:outputText value="#{msgs.surname}" /> -->
+<!-- 				<p:inputText id="surname" value="#{studentManagerView.newStudent.surname}" style="width: 250px;"/> -->
+				
+<!-- 				<h:outputText value="#{msgs.email}" /> -->
+<!-- 				<p:inputText id="email" value="#{studentManagerView.newStudent.email}" required="true" requiredMessage="#{msgs.email}: #{msgs.emptyValue}"  -->
+<!-- 					validatorMessage="#{msgs.email}: #{msgs.notValidEmail}" style="width: 250px;"> -->
+<!-- 					<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/> -->
+<!-- 				</p:inputText> -->
+				
+<!-- 				<h:outputText value="#{msgs.course}" /> -->
+<!-- 				<p:inputText id="course" value="#{studentManagerView.newStudent.course}" style="width: 250px;"/> -->
+				
+<!-- 				<h:outputText value="#{msgs.username}" /> -->
+<!-- 				<p:inputText id="username" value="#{studentManagerView.newStudent.username}" required="true" requiredMessage="#{msgs.username}: #{msgs.emptyValue}" style="width: 250px;"/> -->
+				
+<!-- 				<h:outputText value="#{msgs.password}" /> -->
+<!-- 				<p:inputText id="password" value="#{studentManagerView.newStudent.password}" required="true" requiredMessage="#{msgs.password}: #{msgs.emptyValue}" style="width: 250px;"/> -->
+				
+<!-- 			</p:panelGrid> -->
+<!-- 			<p /> -->
+<!-- 			<center> -->
+<!-- 				<p:commandButton value="#{msgs.create}" title="#{msgs.create}" actionListener="#{studentManagerView.createNewStudent()}" update="@form studentsDataTable growl" -->
+<!-- 					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('createStudentDialogWidget').hide();" ignoreAutoUpdate="true" process="@form"/> -->
+<!-- 			</center> -->
+<!-- 		</h:form> -->
+	</p:dialog>
+	
+	
+	
+	
+	<p:dialog dynamic="true" id="editProjectTDialog" header="#{msgs.newStudent}" widgetVar="editAdminDialog" modal="true" 
+		showEffect="fade" hideEffect="fade" resizable="false" style="width: 60%;">
+<!-- 		<h:form id="editProjectTopicForm"> -->
+<!-- 			<p:messages id="msgs" escape="false" style="white-space: pre;" /> -->
+<!-- 			<p:panelGrid id="editProjectTopicPanelGrid" columns="2"> -->
+<!-- 				<h:outputText value="#{msgs.topicTitle}" /> -->
+<!-- 				<p:inputText id="topicTitle" value="#{projectTopicManagerView.selectedProjectTopic.topicTitle}" required="true" requiredMessage="#{msgs.topicTitle}: #{msgs.emptyValue}" style="width: 250px;"/> -->
+				
+<!-- 				<h:outputText value="#{msgs.topicDescription}" /> -->
+<!-- 				<p:inputTextarea id="topicDescription" value="#{projectTopicManagerView.selectedProjectTopic.topicDescription}" rows="8" style="width: 250px;"/> -->
+				
+<!-- 			</p:panelGrid> -->
+<!-- 			<p /> -->
+<!-- 			<center> -->
+<!-- 				<p:commandButton value="#{msgs.create}" title="#{msgs.create}" actionListener="#{projectTopicManagerView.updateSelectedProjectTopic()}" update="@form projectTopicsDataTable growl" -->
+<!-- 					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('editProjectTopicDialogWidget').hide();" ignoreAutoUpdate="true" process="@form"/> -->
+<!-- 			</center> -->
+<!-- 		</h:form> -->
+	</p:dialog>
+	
+	
+	
+	
+	<p:dataTable id="projectDataTable" value="#{projectsBean.supervisorProjects}" var="project" emptyMessage="#{msgs.noResultsFound}" rows="10" 
+		paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" style="width: 93%">
+		<f:facet name="header" >
+			<h:outputText value="project" />
+		</f:facet>
+		<p:column headerText="#{msgs.name}" >
+			<p:commandLink value="#{project.title}" actionListener="#{projectsBean.setProject(project)}" oncomplete="PF('editProjectTDialog').show()"
+				update="editAdminDialog" />
+		</p:column>
+		<p:column headerText="Project Title" >
+			<h:outputText value="#{project.title}" />
+		</p:column>
+		<p:column headerText="Project Description" >
+			<h:outputText value="#{project.description}" />
+		</p:column>
+		<p:column headerText="Required Skills" >
+			<h:outputText value="#{project.requiredSkills}" />
+		</p:column>
+				
+		<p:column width="70" >
+			<f:facet name="header">
+				<p:commandButton id="createButton" icon="ui-icon-plus" title="#{msgs.create}" actionListener="#{projectsBean.prepareNewProjectToCreate()}"
+					oncomplete="PF('createProjectDialog').show()" update="createProjectDialog" />
+			</f:facet>
+			
+		</p:column>
+				
+	</p:dataTable>
+	
+</ui:composition>
