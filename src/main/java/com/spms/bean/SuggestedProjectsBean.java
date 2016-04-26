@@ -6,15 +6,13 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.servlet.http.HttpSession;
 
-import org.primefaces.component.selectonemenu.SelectOneMenu;
-
-import com.spms.entity.Student;
 import com.spms.entity.StudentProject;
 import com.spms.entity.StudentProjectStatus;
 import com.spms.entity.Supervisor;
@@ -23,10 +21,7 @@ import com.spms.service.StudentService;
 @ManagedBean
 @ViewScoped
 public class SuggestedProjectsBean implements Serializable {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	private List<StudentProject> studentProjects;
@@ -61,7 +56,8 @@ public class SuggestedProjectsBean implements Serializable {
 	public void save(StudentProject studentProject)
 	{
 		studentService.updateSuggestedProjectStatus(studentProject);
-
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage("Student Project: " + studentProject.getTitle() + " " + studentProject.getStatus().getName()));
 	}
 	
 	public void updateSuggestedProjectStatus(AjaxBehaviorEvent e) {

@@ -1,15 +1,20 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 	
-	<p:submenu label="Admin">
+	<p:submenu label="Admin" rendered="#{sessionBean.admin}">
 		<p:menuitem value="Admins" url="/admin/index.xhtml" />
 		<p:menuitem value="Supervisors" url="/admin/supervisors.xhtml" />
 		<p:menuitem value="Students" url="/admin/students.xhtml" />
 		<p:menuitem value="Project Topics" url="/admin/projectTopics.xhtml" />
 	</p:submenu>
 	
-	<p:submenu label="Supervisors">
+	<p:submenu label="Supervisors" rendered="#{sessionBean.supervisor}">
 		<p:menuitem value="Projects" url="/supervisor/projectsList.xhtml" />
 		<p:menuitem value="Topics" url="/supervisor/projectTopics.xhtml" />
+		<p:menuitem value="Suggested Projects" url="/supervisor/suggestedProjects.xhtml" />
+	</p:submenu>
+	
+	<p:submenu label="Students" rendered="#{sessionBean.student}">
+		<p:menuitem value="Student Project" url="/student/studentProject.xhtml" />
 	</p:submenu>
 	
 </ui:composition>

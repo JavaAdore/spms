@@ -54,13 +54,13 @@ public class LoginBean implements Serializable {
 				systemUser = systemUserService
 						.findSupervisorByUserName(userName);
 				FacesContext.getCurrentInstance().getExternalContext()
-						.redirect("supervisor/index.xhtml");
+						.redirect("supervisor/projectsList.xhtml");
 
 			} else if (student) {
 				systemUser = systemUserService.findStudentByUserName(userName);
 
 				FacesContext.getCurrentInstance().getExternalContext()
-						.redirect("student/index.xhtml");
+						.redirect("student/studentProject.xhtml");
 
 			}
 			

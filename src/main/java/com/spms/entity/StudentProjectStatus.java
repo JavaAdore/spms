@@ -12,7 +12,7 @@ public class StudentProjectStatus {
 	public final static StudentProjectStatus ACCEPTED_BY_SUPERVISOR = new StudentProjectStatus(
 			2, "Approved By Supervisor");
 	public final static StudentProjectStatus REJECTED_BY_SUPERVISOR = new StudentProjectStatus(
-			3, "Regiected By Supervisor");
+			3, "Rejected By Supervisor");
 
 	public StudentProjectStatus() {
 
