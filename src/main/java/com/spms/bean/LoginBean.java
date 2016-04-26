@@ -2,10 +2,6 @@ package com.spms.bean;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -16,18 +12,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.spms.entity.Admin;
 import com.spms.entity.sec.SystemUser;
 import com.spms.service.SystemUserService;
 
 @ManagedBean
 @ViewScoped
 public class LoginBean implements Serializable {
-
-	/**
-	 * 
-	 */
-
+	
 	@EJB
 	SystemUserService systemUserService;
 

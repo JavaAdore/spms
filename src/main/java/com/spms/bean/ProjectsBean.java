@@ -18,10 +18,7 @@ import com.spms.service.ProjectService;
 @ManagedBean
 @ViewScoped
 public class ProjectsBean implements Serializable {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	private List<Project> supervisorProjects;
@@ -65,12 +62,12 @@ public class ProjectsBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO,
-							"Project has been created successfully", ""));
+							"Project has been updated successfully", ""));
 		} catch (Exception ex) {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Sorry not able to add project", ""));
+							"Sorry not able to update project", ""));
 
 		}
 	}
