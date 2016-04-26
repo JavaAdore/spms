@@ -1,39 +1,50 @@
- package com.spms.entity.sec;
+package com.spms.entity.sec;
 
- import java.io.Serializable;
- 
- import javax.persistence.Column;
- import javax.persistence.Entity;
- import javax.persistence.Id;
- import javax.persistence.Table;
+import java.io.Serializable;
 
- @Entity
- @Table(name = "SYSTEMUSERGROUP")
- public class SystemUserGroup implements Serializable {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
- private static final long serialVersionUID = 1L;
+@Entity
+@NamedQueries({ @NamedQuery(name = "SystemUserGroup.findAll", query = "SELECT model FROM SystemUserGroup model"),
+		@NamedQuery(name = "SystemUserGroup.findUserGroup", query = "SELECT model FROM SystemUserGroup model WHERE model.username = :username AND model.groupName = :groupName") })
+@Table(name = "SYSTEMUSERGROUP")
+public class SystemUserGroup implements Serializable {
 
- @Id
- @Column(name = "USER_NAME")
- private String username;
+	private static final long serialVersionUID = 1L;
 
- @Id
- @Column(name = "GROUPNAME")
- private String groupName;
+	@Id
+	@Column(name = "USER_NAME")
+	private String username;
 
- public String getUsername() {
- return username;
- }
+	@Id
+	@Column(name = "GROUPNAME")
+	private String groupName;
 
- public void setUsername(String username) {
- this.username = username;
- }
+	public SystemUserGroup(){}
+	
+	public SystemUserGroup(String username, String groupName) {
+		this.username = username;
+		this.groupName = groupName;
+	}
 
- public String getGroupName() {
- return groupName;
- }
+	public String getUsername() {
+		return username;
+	}
 
- public void setGroupName(String groupName) {
- this.groupName = groupName;
- }
- }
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+}

@@ -19,5 +19,7 @@ public interface SupervisorService {
 	Supervisor findBySupervisorId(String supervisorId);
 	
 	Supervisor findByUsername(String username);
+	
+	Supervisor findSupervisorByStudentId(String studentId);
 
 }

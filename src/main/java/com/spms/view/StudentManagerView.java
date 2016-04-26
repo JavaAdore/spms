@@ -13,7 +13,9 @@ import javax.faces.context.FacesContext;
 
 import com.spms.entity.Student;
 import com.spms.entity.sec.SystemUser;
+import com.spms.entity.sec.SystemUserGroup;
 import com.spms.service.StudentService;
+import com.spms.service.SystemUserGroupService;
 import com.spms.service.SystemUserService;
 import com.spms.util.Util;
 
@@ -28,6 +30,9 @@ public class StudentManagerView implements Serializable {
 	
 	@EJB
 	StudentService studentService;
+	
+	@EJB
+	SystemUserGroupService systemUserGroupService;
 
 	private List<Student> studentList;
 	private Student newStudent;
@@ -66,6 +71,13 @@ public class StudentManagerView implements Serializable {
 		newStudent.setPassword(Util.hashPassword(newStudent.getPassword()));
 		newStudent = studentService.create(newStudent);
 		studentList.add(newStudent);
+		
+		SystemUserGroup systemUserGroup = systemUserGroupService.find(newStudent.getUsername(), "user");
+		if(systemUserGroup == null){
+			systemUserGroup = new SystemUserGroup();
+			systemUserGroupService.create(newStudent.getUsername(), "user");
+		}
+		
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage("Student: " + newStudent.getUsername() + " created successfully."));
 	}
@@ -94,6 +106,7 @@ public class StudentManagerView implements Serializable {
 
 	public void deleteSelectedStudent() {
 		studentService.delete(selectedStudent);
+		systemUserGroupService.delete(selectedStudent.getUsername(), "user");
 		studentList.remove(selectedStudent);
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage("Student: " + selectedStudent.getUsername() + " successfully deleted."));
