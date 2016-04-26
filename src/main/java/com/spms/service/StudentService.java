@@ -3,6 +3,7 @@ package com.spms.service;
 import java.util.List;
 
 import com.spms.entity.Student;
+import com.spms.entity.StudentProject;
 
 public interface StudentService {
 
@@ -19,5 +20,9 @@ public interface StudentService {
 	Student findByStudentId(String studentId);
 	
 	Student findByUsername(String username);
+
+	StudentProject getStudentProject(Student student);
+
+	void save(StudentProject studentProject);
 
 }

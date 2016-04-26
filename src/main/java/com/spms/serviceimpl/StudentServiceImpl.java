@@ -2,6 +2,7 @@ package com.spms.serviceimpl;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -10,7 +11,10 @@ import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.spms.dao.StudentDAO;
 import com.spms.entity.Student;
+import com.spms.entity.StudentProject;
+import com.spms.entity.StudentProjectStatus;
 import com.spms.service.StudentService;
 
 @Stateless
@@ -20,6 +24,9 @@ public class StudentServiceImpl implements StudentService {
 
 	@PersistenceContext(unitName = "database")
 	EntityManager em;
+	
+	@EJB
+	StudentDAO studentDAO;
 	
 	@Override
 	public Student create(Student student) {
@@ -60,6 +67,23 @@ public class StudentServiceImpl implements StudentService {
 	public Student findByUsername(String username) {
 		List<Student>  resultList = em.createNamedQuery("Student.findByUsername").setParameter("username", username).getResultList();
 		return resultList.isEmpty() ? null : resultList.get(0);
+	}
+
+	@Override
+	public StudentProject getStudentProject(Student student) {
+		// TODO Auto-generated method stub
+		return studentDAO.getStudentProject( student) ;
+	}
+
+	@Override
+	public void save(StudentProject studentProject) {
+
+		studentDAO.save(studentProject);
+	}
+	
+	public void saveOrUpdateStudentProjectStatus(StudentProjectStatus studentProjectStatus)
+	{ 
+		studentDAO.saveOrUpdateStudentProjectStatus(studentProjectStatus);
 	}
 
 }

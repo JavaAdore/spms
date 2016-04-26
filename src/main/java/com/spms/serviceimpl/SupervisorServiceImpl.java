@@ -29,7 +29,7 @@ public class SupervisorServiceImpl implements SupervisorService {
 		SystemUserGroup systemUserGroup = new SystemUserGroup();
 		systemUserGroup.setUsername(supervisor.getUsername());
 		systemUserGroup.setGroupName("supervisor");
-		em.persist(systemUserGroup);
+		em.persist(systemUserGroup);  
 		return supervisor;
 	}
 

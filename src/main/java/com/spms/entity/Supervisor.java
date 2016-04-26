@@ -55,4 +55,30 @@ public class Supervisor extends SystemUser implements Serializable {
 		this.telephoneNumber = telephoneNumber;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((supervisorId == null) ? 0 : supervisorId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Supervisor other = (Supervisor) obj;
+		if (supervisorId == null) { 
+			if (other.supervisorId != null)
+				return false;
+		} else if (!supervisorId.equals(other.supervisorId))
+			return false;
+		return true;
+	}
+
 }
