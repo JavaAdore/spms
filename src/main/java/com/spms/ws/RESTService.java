@@ -52,9 +52,6 @@ public class RESTService {
 //			return Response.status(Status.OK).entity(em.createNamedQuery("Supervisor.findAll").getResultList()).build();
 			return Response.status(Status.OK).entity(supervisorService.getAllSupervisors()).build();
 		} else{
-//			Supervisor supervisor1= new Supervisor();
-//			supervisor1.setId(1);supervisor1.setName("Supervisor test1");
-//			supervisor1.setEmail("supervisorEmailTest1@email.com");
 			return Response.status(Status.OK).entity(supervisorService.findSupervisorByStudentId(studentid)).build();
 		}
 	}
@@ -66,10 +63,7 @@ public class RESTService {
 		if(supervisorid.equals("all")){
 			return Response.status(Status.OK).entity(studentService.getAllStudents()).build();
 		} else{
-			Student student1 = new Student();
-			student1.setId(1);
-			student1.setName("Student1 name test1");
-			return Response.status(Status.OK).entity(student1).build();
+			return Response.status(Status.OK).entity(studentService.findBySupervisorId(supervisorid)).build();
 		}
 	}
 

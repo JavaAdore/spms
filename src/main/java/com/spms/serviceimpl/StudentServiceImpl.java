@@ -10,6 +10,7 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import com.spms.dao.StudentDAO;
 import com.spms.entity.Student;
@@ -104,16 +105,21 @@ public class StudentServiceImpl implements StudentService {
 			studentProject.setSuggestedSupervisor(studentProject
 					.getSuggestedSupervisor());
 			studentDAO.updateSuggestedProjectStatus(studentProject);
-
-			studentDAO.setStudentProject(studentProject.getStudent(),
-					studentProject.getId());
-
+			studentDAO.setStudentProject(studentProject.getStudent(), studentProject.getId());
 		}else
-		{
 			studentDAO.updateSuggestedProjectStatus(studentProject);
+	}
 
+	@SuppressWarnings("rawtypes")
+	@Override
+	public Student findBySupervisorId(String supervisorId) {
+		Query query = em.createQuery("SELECT model FROM  Student model WHERE model.project.supervisor.supervisorId = :supervisorId");
+		query.setParameter("supervisorId", supervisorId);
+		List queryResult = query.getResultList();
+		if(queryResult.size()>0){
+			return (Student) queryResult.get(0);
 		}
-
+		return null;
 	}
 
 }

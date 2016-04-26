@@ -72,7 +72,7 @@ public class SupervisorServiceImpl implements SupervisorService {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public Supervisor findSupervisorByStudentId(String studentId) {
-		Query query = em.createQuery("SELECT model.supervisor FROM  StudentProject model WHERE model.student.studentId = :studentId");
+		Query query = em.createQuery("SELECT model.project.supervisor FROM  Student model WHERE model.studentId = :studentId");
 		query.setParameter("studentId", studentId);
 		List queryResult = query.getResultList();
 		if(queryResult.size()>0)
