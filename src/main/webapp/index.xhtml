@@ -9,10 +9,11 @@
     <body>
         <h2>Hello, please log in:</h2>
         <h:form>
+        <p:growl></p:growl>
             Username: <p:inputText value="#{loginBean.userName}"/>
             Password: <p:password value="#{loginBean.password}"/>
             <br/>
-            <p:commandButton value="Submit" actionListener="#{loginBean.login()}"/>
+            <p:commandButton value="Submit" actionListener="#{loginBean.login()}" update="@form"   />
             <p:commandButton value="Reset" type="reset"/>
         </h:form>
     </body>

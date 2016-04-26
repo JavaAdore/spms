@@ -18,10 +18,10 @@
 			<span style="padding-right: 30px; margin-right: 15px; padding-top: 15px; float: right;">
 				<h:outputText value="Hello, " style="color: white; font-size: 17px;"/>
 				<p:commandLink id="user" actionListener="#" style="text-decoration: none;">
-					<h:outputText value="User" style="color: #D7DB07;"/>
+					<h:outputText value="#{sessionBean.currentLogedUserName()}" style="color: #D7DB07;"/>
 				</p:commandLink>
 				<h:outputText value="   |   " style="color: white;"/>
-				<p:commandLink id="ajax" actionListener="#" style="text-decoration: none;">
+				<p:commandLink id="ajax" actionListener="#{sessionBean.logout()}" style="text-decoration: none;">
 					<h:outputText value="Logout" style="color: #01ADEF; "/>
 				</p:commandLink>
 			</span>
