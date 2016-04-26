@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.spms.entity.Admin;
 import com.spms.entity.sec.SystemUser;
 import com.spms.service.SystemUserService;
 
@@ -44,30 +45,37 @@ public class LoginBean implements Serializable {
 		try {
 			request.login(userName, password);
 
-		SystemUser systemUser = 	systemUserService.findByUsername(userName);
-			
 			boolean admin = request.isUserInRole("admin");
 
 			boolean supervisor = request.isUserInRole("supervisor");
 
 			boolean student = request.isUserInRole("student");
 
-			HttpSession httpSession = (HttpSession) FacesContext
-					.getCurrentInstance().getExternalContext().getSession(true);
-			httpSession.setAttribute("currentUser", systemUser);
-
+			SystemUser systemUser = null;
 			if (admin) {
+
+				systemUser = systemUserService
+						.findAdministratorByUserName(userName);
+
 				FacesContext.getCurrentInstance().getExternalContext()
 						.redirect("admin/index.xhtml");
 			} else if (supervisor) {
+				systemUser = systemUserService
+						.findSupervisorByUserName(userName);
 				FacesContext.getCurrentInstance().getExternalContext()
 						.redirect("supervisor/index.xhtml");
 
 			} else if (student) {
+				systemUser = systemUserService.findStudentByUserName(userName);
+
 				FacesContext.getCurrentInstance().getExternalContext()
 						.redirect("student/index.xhtml");
 
 			}
+			
+			HttpSession httpSession = (HttpSession) FacesContext
+					.getCurrentInstance().getExternalContext().getSession(true);
+			httpSession.setAttribute("currentUser", systemUser);
 
 			System.out.println("worked fine ");
 		} catch (ServletException e) {

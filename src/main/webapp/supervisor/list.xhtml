@@ -1,18 +1,9 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 	
-<!-- 	<p:confirmDialog dynamic="true" id="deleteGameDialog" widgetVar="deleteGameDialogWidget" header="#{msgs.areYouSure}"> -->
-<!-- 		<f:facet name="message"> -->
-<!-- 			<h:outputText value="#{msgsCog.pleaseConfirmYouWantToDelete} #{tourismPOIGameAdminView.selectedPoiGame.name}" /> -->
-<!-- 		</f:facet> -->
-<!-- 		<h:form id="deleteGameForm"> -->
-<!-- 			<p:commandButton value="#{msgs.yes}" icon="ui-icon-check" actionListener="#{tourismPOIGameAdminView.deleteSelectedPoiGame}" -->
-<!-- 				oncomplete="PF('deleteGameDialogWidget').hide();" update="gameListDataTable" /> -->
-<!-- 			<p:commandButton value="#{msgs.no}" icon="ui-icon-close" onclick="PF('deleteGameDialogWidget').hide();" /> -->
-<!-- 		</h:form> -->
-<!-- 	</p:confirmDialog> -->
+
 	
-	<p:dataTable id="supervisorsDataTable" value="#{supervisorManagedView.supervisors}" var="supervisor" emptyMessage="No Results Found" rows="10" 
+	<p:dataTable id="supervisorsDataTable" value="#{supervisorManagerView.supervisorList}" var="supervisor" emptyMessage="No Results Found" rows="10" 
 		paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" style="width: 93%">
 		<f:facet name="header" >
 			<h:outputText value="Supervisors" />

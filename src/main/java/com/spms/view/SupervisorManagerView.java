@@ -117,4 +117,9 @@ public class SupervisorManagerView implements Serializable {
 		this.selectedSupervisor = selectedSupervisor;
 	}
 
+
+	public void setSupervisorList(List<Supervisor> supervisorList) {
+		this.supervisorList = supervisorList;
+	}
+
 }

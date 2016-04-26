@@ -6,6 +6,7 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -16,6 +17,7 @@ import com.spms.entity.sec.SystemUser;
 	@NamedQuery(name = "Student.findByStudentId", query = "SELECT model FROM Student model WHERE model.studentId = :studentId"),
 	@NamedQuery(name = "Student.findByUsername", query = "SELECT model FROM Student model WHERE model.username = :username")})
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "studentId"}) })
+@PrimaryKeyJoinColumn(name="id")
 public class Student extends SystemUser implements Serializable {
 
 	private static final long serialVersionUID = 1L;

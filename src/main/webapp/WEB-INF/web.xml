@@ -32,7 +32,7 @@
 	</servlet-mapping>
 	
 	<welcome-file-list>
-		<welcome-file>index.xhtml</welcome-file>
+		<welcome-file>login.xhtml</welcome-file>
 	</welcome-file-list>
 	
 	
@@ -140,6 +140,23 @@
         <servlet-name>jersey-serlvet</servlet-name>
         <url-pattern>/ws/*</url-pattern>
     </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>default-admin-initializer-serlvet</servlet-name>
+        <servlet-class>com.spms.servlet.AdminstratorCreatorServlet</servlet-class>
+        
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>default-admin-initializer-serlvet</servlet-name>
+        <url-pattern>/initializeAdmin</url-pattern>
+    </servlet-mapping>
+    
+    
+    
+    
+    
     
 	
 	

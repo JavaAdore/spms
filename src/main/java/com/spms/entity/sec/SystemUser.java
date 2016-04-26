@@ -32,14 +32,11 @@ public class SystemUser implements Serializable {
 
 	private String surname;
 
-	@Basic(optional = false)
 	private String email;
 
-	@Basic(optional = false)
 	@Column(name = "USER_NAME")
 	private String username;
 
-	@Basic(optional = false)
 	@Column(name = "USERPASSWORD")
 	private String password;
 

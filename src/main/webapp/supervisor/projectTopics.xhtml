@@ -1,0 +1,115 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/master.xhtml">
+	<ui:define name="title">
+		<title>Topics</title>
+	</ui:define>
+
+	<ui:define name="path">
+		<h:form prependId="false">
+			<p:breadCrumb id="path" style="width:91%;">
+				<p:menuitem value="Home" url="/supervisor/index.xhtml" />
+				<p:menuitem value="Supervisor" url="/supervisor/index.xhtml" />
+				<p:menuitem value="Project Topics"
+					url="/supervisor/projectTopics.xhtml" />
+			</p:breadCrumb>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="content">
+
+		<!-- 	Start project Topics -->
+		<p:dialog dynamic="true" id="createProjectTopicDialog"
+			header="#{msgs.newStudent}"
+			widgetVar="createProjectTopicDialogWidget" modal="true"
+			showEffect="fade" hideEffect="fade" resizable="false"
+			style="width: 60%;">
+			<h:form id="createProjectTopicForm">
+				<p:messages id="msgs" escape="false" style="white-space: pre;" />
+				<p:panelGrid id="createProjectTopicPanelGrid" columns="2">
+					<h:outputText value="#{msgs.topicTitle}" />
+					<p:inputText id="topicTitle"
+						value="#{projectTopicManagerView.newProjectTopic.topicTitle}"
+						required="true"
+						requiredMessage="#{msgs.topicTitle}: #{msgs.emptyValue}"
+						style="width: 250px;" />
+
+					<h:outputText value="#{msgs.topicDescription}" />
+					<p:inputTextarea id="topicDescription"
+						value="#{projectTopicManagerView.newProjectTopic.topicDescription}"
+						rows="8" style="width: 250px;" />
+
+				</p:panelGrid>
+				<p />
+				<center>
+					<p:commandButton value="#{msgs.create}" title="#{msgs.create}"
+						actionListener="#{projectTopicManagerView.createNewProjectTopic()}"
+						update="@form projectTopicsDataTable growl"
+						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('createProjectTopicDialogWidget').hide();"
+						ignoreAutoUpdate="true" process="@form" />
+				</center>
+			</h:form>
+		</p:dialog>
+		
+		
+		<p:dialog dynamic="true" id="editProjectTopicDialog" header="#{msgs.newStudent}" widgetVar="editProjectTopicDialogWidget" modal="true" 
+		showEffect="fade" hideEffect="fade" resizable="false" style="width: 60%;">
+		<h:form id="editProjectTopicForm">
+			<p:messages id="msgs" escape="false" style="white-space: pre;" />
+			<p:panelGrid id="editProjectTopicPanelGrid" columns="2">
+				<h:outputText value="#{msgs.topicTitle}" />
+				<p:inputText id="topicTitle" value="#{projectTopicManagerView.selectedProjectTopic.topicTitle}" required="true" requiredMessage="#{msgs.topicTitle}: #{msgs.emptyValue}" style="width: 250px;"/>
+				
+				<h:outputText value="#{msgs.topicDescription}" />
+				<p:inputTextarea id="topicDescription" value="#{projectTopicManagerView.selectedProjectTopic.topicDescription}" rows="8" style="width: 250px;"/>
+				
+			</p:panelGrid>
+			<p />
+			<center>
+				<p:commandButton value="#{msgs.create}" title="#{msgs.create}" actionListener="#{projectTopicManagerView.updateSelectedProjectTopic()}" update="@form projectTopicsDataTable growl"
+					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('editProjectTopicDialogWidget').hide();" ignoreAutoUpdate="true" process="@form"/>
+			</center>
+		</h:form>
+	</p:dialog>
+		<!-- 	End project Topics   -->
+
+
+
+
+		<p:dataTable id="projectTopicsDataTable"
+			value="#{projectTopicManagerView.projectTopicList}"
+			var="projectTopic" emptyMessage="#{msgs.noResultsFound}" rows="10"
+			paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+			style="width: 93%">
+			<f:facet name="header">
+				<h:outputText value="Topics" />
+			</f:facet>
+			<p:column headerText="#{msgs.topicTitle}">
+				<p:commandLink value="#{projectTopic.topicTitle}"
+					actionListener="#{projectTopicManagerView.setSelectedProjectTopic(projectTopic)}"
+					update="editProjectTopicDialog"
+					oncomplete="PF('editProjectTopicDialogWidget').show()" />
+			</p:column>
+			<p:column headerText="#{msgs.topicDescription}">
+				<h:outputText value="#{projectTopic.topicDescription}" />
+			</p:column>
+ 
+			<p:column width="70">
+				<f:facet name="header">
+					<p:commandButton id="createButton" icon="ui-icon-plus"
+						title="#{msgs.create}"
+						actionListener="#{projectTopicManagerView.beforeCreateNewProjectTopic()}"
+						oncomplete="PF('createProjectTopicDialogWidget').show()"
+						update="createProjectTopicDialog" />
+				</f:facet>
+				
+			</p:column>
+
+		</p:dataTable>
+
+	</ui:define>
+</ui:composition>

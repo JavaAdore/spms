@@ -22,6 +22,8 @@ public class ProjectTopic implements Serializable {
 	private Integer id;
 	private String topicTitle;
 	private String topicDescription;
+	
+	
 
 	public Integer getId() {
 		return id;

@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.spms.entity.Supervisor;
+import com.spms.entity.sec.SystemUserGroup;
 import com.spms.service.SupervisorService;
 
 @Stateless
@@ -24,6 +25,10 @@ public class SupervisorServiceImpl implements SupervisorService {
 	@Override
 	public Supervisor create(Supervisor supervisor) {
 		em.persist(supervisor);
+		SystemUserGroup systemUserGroup = new SystemUserGroup();
+		systemUserGroup.setUsername(supervisor.getUsername());
+		systemUserGroup.setGroupName("supervisor");
+		em.persist(systemUserGroup);
 		return supervisor;
 	}
 
