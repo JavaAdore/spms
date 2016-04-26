@@ -7,11 +7,12 @@
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		
 		<jta-data-source>jdbc/WebappsDB</jta-data-source>
-
+		<class>com.spms.entity.sec.SystemUserGroup</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 
 		<properties>
-<!-- 			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" /> -->
+<!-- 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" /> -->
+			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
 			
 			<property name="javax.persistence.schema-generation.database.action" value="update" />
 			<property name="eclipselink.ddl-generation.output-mode" value="database" />

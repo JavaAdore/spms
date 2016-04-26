@@ -15,5 +15,7 @@ public interface ProjectService {
 	void delete(Project project);
 
 	List<Project> getAllProjects();
+	
+	List<Project> findBySupervisorId(String supervisorId);
 
 }

@@ -47,5 +47,11 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<Project> getAllProjects() {
 		return em.createNamedQuery("Project.findAll").getResultList();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Project> findBySupervisorId(String supervisorId) {
+		return em.createNamedQuery("Project.findBySupervisorId").setParameter("supervisorId", supervisorId).getResultList();
+	}
 	
 }

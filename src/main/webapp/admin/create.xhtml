@@ -29,7 +29,7 @@
 			<p />
 			<center>
 				<p:commandButton value="#{msgs.create}" title="#{msgs.create}" actionListener="#{adminManagerView.createNewAdmin()}" update="@form adminsDataTable growl"
-					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('createAdminDialogWidget').hide();" ignoreAutoUpdate="true"/>
+					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('createAdminDialogWidget').hide();" ignoreAutoUpdate="true"  process="@form"/>
 			</center>
 		</h:form>
 	</p:dialog>
@@ -73,7 +73,7 @@
 			<p />
 			<center>
 				<p:commandButton value="#{msgs.create}" title="#{msgs.create}" actionListener="#{supervisorManagerView.createNewSupervisor()}" update="@form supervisorsDataTable growl"
-					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('createSupervisorDialogWidget').hide();" ignoreAutoUpdate="true"/>
+					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('createSupervisorDialogWidget').hide();" ignoreAutoUpdate="true" process="@form"/>
 			</center>
 		</h:form>
 	</p:dialog>
@@ -114,7 +114,7 @@
 			<p />
 			<center>
 				<p:commandButton value="#{msgs.create}" title="#{msgs.create}" actionListener="#{studentManagerView.createNewStudent()}" update="@form studentsDataTable growl"
-					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('createStudentDialogWidget').hide();" ignoreAutoUpdate="true"/>
+					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('createStudentDialogWidget').hide();" ignoreAutoUpdate="true" process="@form"/>
 			</center>
 		</h:form>
 	</p:dialog>
@@ -136,7 +136,7 @@
 			<p />
 			<center>
 				<p:commandButton value="#{msgs.create}" title="#{msgs.create}" actionListener="#{projectTopicManagerView.createNewProjectTopic()}" update="@form projectTopicsDataTable growl"
-					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('createProjectTopicDialogWidget').hide();" ignoreAutoUpdate="true"/>
+					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('createProjectTopicDialogWidget').hide();" ignoreAutoUpdate="true" process="@form"/>
 			</center>
 		</h:form>
 	</p:dialog>
