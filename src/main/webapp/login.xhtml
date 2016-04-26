@@ -1,20 +1,48 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">  
     <h:head>     
           <title>Login</title>
     </h:head>
     <body>
-        <h2>Hello, please log in:</h2>
-        <h:form>
-        <p:growl></p:growl>
-            Username: <p:inputText value="#{loginBean.userName}"/>
-            Password: <p:password value="#{loginBean.password}"/>
-            <br/>
-            <p:commandButton value="Submit" actionListener="#{loginBean.login()}" update="@form"   />
-            <p:commandButton value="Reset" type="reset"/>
-        </h:form>
+        <center>
+        	
+			<div style="font-family: fantasy; top:50%; margin-top: 13%;">
+
+				<h:form id="loginForm">
+					<p:panel header="Login" style="width: 470px;  text-align: left;" >
+
+						<h:panelGrid id="loginPanel" columns="1">
+
+							<p:messages globalOnly="true" showDetail="no" autoUpdate="true" closable="true" />
+
+							<h:outputText value="Username" style="font-size: 18px;" />
+
+							<p:inputText id="username" value="#{loginBean.userName}" style="width: 420px;" />
+
+							<br />
+
+							<h:outputText value="Password" style="font-size: 18px;" />
+
+							<p:password id="password" value="#{loginBean.password}" feedback="false" style="width: 420px;" />
+
+							<br />
+							<f:facet name="footer">
+								<center>
+									<p:commandButton value="Submit" actionListener="#{loginBean.login()}" update="@form"   />
+	            					<p:commandButton value="Reset" type="reset"/>
+            					</center>
+							</f:facet>
+						</h:panelGrid>
+
+					</p:panel>
+
+				</h:form>
+			</div>
+		</center>
     </body>
 </html>
