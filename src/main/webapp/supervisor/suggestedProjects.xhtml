@@ -37,7 +37,7 @@
 							var="status" itemValue="#{status}" itemLabel="#{status.name}"></f:selectItems>
 
 					</p:selectOneMenu>
-					<p:commandButton value="save" actionListener="#{suggestedProjectsBean.save(studentProject)}" />
+					<p:commandButton value="save" actionListener="#{suggestedProjectsBean.save(studentProject)}" update="@form" />
 				</p:column>
 			</p:dataTable>
 		</h:form>

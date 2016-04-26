@@ -17,6 +17,7 @@ import com.spms.entity.Student;
 import com.spms.entity.StudentProject;
 import com.spms.entity.StudentProjectStatus;
 import com.spms.entity.Supervisor;
+import com.spms.exception.StudentAlreadyAssignedToProjectException;
 import com.spms.service.StudentService;
 
 @Stateless
@@ -82,8 +83,16 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public void save(StudentProject studentProject) {
+	public void save(StudentProject studentProject)
+			throws StudentAlreadyAssignedToProjectException {
 
+		Student student = studentDAO.findStudent(studentProject.getId());
+		StudentProject persistedStudentProject = studentDAO
+				.getStudentProject(student);
+
+		if (student.getProject() != null || persistedStudentProject != null) {
+			throw new StudentAlreadyAssignedToProjectException();
+		}
 		studentDAO.save(studentProject);
 	}
 
@@ -102,11 +111,11 @@ public class StudentServiceImpl implements StudentService {
 	public void updateSuggestedProjectStatus(StudentProject studentProject) {
 		if (studentProject.getStatus().equals(
 				StudentProjectStatus.ACCEPTED_BY_SUPERVISOR)) {
-			studentProject.setSuggestedSupervisor(studentProject
+			studentProject.setSupervisor(studentProject
 					.getSuggestedSupervisor());
 			studentDAO.updateSuggestedProjectStatus(studentProject);
 			studentDAO.setStudentProject(studentProject.getStudent(), studentProject.getId());
-		}else
+		
 			studentDAO.updateSuggestedProjectStatus(studentProject);
 	}
 

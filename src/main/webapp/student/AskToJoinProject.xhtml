@@ -1,0 +1,91 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/master.xhtml">
+	<ui:define name="title">
+		<title>Student Project</title>
+	</ui:define>
+
+	<ui:define name="path">
+		<h:form prependId="false">
+			<p:breadCrumb id="path" style="width:91%;">
+				<p:menuitem value="Student Project"
+					url="/student/studentProject.xhtml" />
+			</p:breadCrumb>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="content">
+
+
+		<h:form id="suggestedProjectForm">
+
+			<p:growl />
+			<p:panelGrid
+				rendered="#{joinProjectRequestBean.student.project !=null}">
+				<p:row>
+					<p:column colspan="2">
+						<p:outputLabel value="Project suggested by student" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="projcet title" />
+					</p:column>
+
+					<p:column>
+						<p:outputLabel
+							value="#{joinProjectRequestBean.student.project.title }" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="projcet description" />
+					</p:column>
+
+					<p:column>
+						<p:outputLabel
+							value="#{joinProjectRequestBean.student.project.description}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="projcet supervisor" />
+					</p:column>
+
+					<p:column>
+						<p:outputLabel
+							value="#{joinProjectRequestBean.student.project.supervisor}" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+
+
+
+			<p:dataTable
+				rendered="#{joinProjectRequestBean.student.project == null}"
+				value="#{joinProjectRequestBean.joinalbeProjects}"
+				var="joinalbeProject">
+				<p:column headerText="Project">
+					<p:outputLabel value="#{joinalbeProject.title}" />
+				</p:column>
+				<p:column headerText="supervisor">
+					<p:outputLabel value="#{joinalbeProject.supervisor.surname}" />
+				</p:column>
+				<p:column headerText="Ask To Join">
+					<p:commandButton value="Ask To Join Project"
+						actionListener="#{joinProjectRequestBean.requiredToJoinProject(joinalbeProject)}"
+						update="@form" />
+
+				</p:column>
+
+			</p:dataTable>
+
+			<br />
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>

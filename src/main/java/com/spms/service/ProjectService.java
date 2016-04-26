@@ -3,6 +3,8 @@ package com.spms.service;
 import java.util.List;
 
 import com.spms.entity.Project;
+import com.spms.entity.Student;
+import com.spms.exception.StudentAlreadyAssignedToProjectException;
 
 public interface ProjectService {
 
@@ -17,5 +19,9 @@ public interface ProjectService {
 	List<Project> getAllProjects();
 	
 	List<Project> findBySupervisorId(String supervisorId);
+
+	List<Project> getJoinableProjects();
+
+	void requestToJoinProject(Student student, Project project) throws StudentAlreadyAssignedToProjectException;
 
 }

@@ -33,8 +33,8 @@ public class Project implements Serializable {
 	@ManyToOne
 	private Supervisor supervisor;
 	public Project(){}
-	public Project(Integer id2) {
-		// TODO Auto-generated constructor stub
+	public Project(Integer id) {
+		
 	}
 
 	public Integer getId() {

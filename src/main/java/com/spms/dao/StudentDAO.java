@@ -28,6 +28,8 @@ public interface StudentDAO {
 
 	void updateSuggestedProjectStatus(StudentProject studentProject);
 
+	Student findStudent(Integer id);
+
 	
 
 }

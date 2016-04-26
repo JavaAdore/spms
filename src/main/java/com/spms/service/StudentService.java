@@ -5,6 +5,7 @@ import java.util.List;
 import com.spms.entity.Student;
 import com.spms.entity.StudentProject;
 import com.spms.entity.Supervisor;
+import com.spms.exception.StudentAlreadyAssignedToProjectException;
 
 public interface StudentService {
 
@@ -24,7 +25,7 @@ public interface StudentService {
 
 	StudentProject getStudentProject(Student student);
 
-	void save(StudentProject studentProject);
+	void save(StudentProject studentProject) throws StudentAlreadyAssignedToProjectException;
 
 	List<StudentProject> getAllSuggestedProjectForSupervisor(Supervisor student);
 

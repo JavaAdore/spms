@@ -69,6 +69,11 @@ public class StudentDAOImpl implements StudentDAO {
 
 		em.merge(studentProject);
 	}
+
+	@Override
+	public Student findStudent(Integer id) {
+		return em.find(Student.class, id);
+	}
 	
 	
 	
