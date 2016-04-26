@@ -26,12 +26,7 @@ import com.spms.util.Util;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class SystemUserServiceImpl implements SystemUserService {
-
-	@PostConstruct
-	public void init() {
-
-	}
-
+	
 	@EJB
 	private SystemUserDAO systemUserDAO;
 
