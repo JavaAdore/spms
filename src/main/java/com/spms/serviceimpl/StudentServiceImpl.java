@@ -115,7 +115,7 @@ public class StudentServiceImpl implements StudentService {
 					.getSuggestedSupervisor());
 			studentDAO.updateSuggestedProjectStatus(studentProject);
 			studentDAO.setStudentProject(studentProject.getStudent(), studentProject.getId());
-		
+		} else
 			studentDAO.updateSuggestedProjectStatus(studentProject);
 	}
 
