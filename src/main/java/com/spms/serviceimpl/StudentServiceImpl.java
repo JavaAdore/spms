@@ -15,6 +15,7 @@ import com.spms.dao.StudentDAO;
 import com.spms.entity.Student;
 import com.spms.entity.StudentProject;
 import com.spms.entity.StudentProjectStatus;
+import com.spms.entity.Supervisor;
 import com.spms.service.StudentService;
 
 @Stateless
@@ -24,10 +25,10 @@ public class StudentServiceImpl implements StudentService {
 
 	@PersistenceContext(unitName = "database")
 	EntityManager em;
-	
+
 	@EJB
 	StudentDAO studentDAO;
-	
+
 	@Override
 	public Student create(Student student) {
 		em.persist(student);
@@ -58,21 +59,25 @@ public class StudentServiceImpl implements StudentService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Student findByStudentId(String studentId) {
-		List<Student>  resultList = em.createNamedQuery("Student.findByStudentId").setParameter("studentId", studentId).getResultList();
+		List<Student> resultList = em
+				.createNamedQuery("Student.findByStudentId")
+				.setParameter("studentId", studentId).getResultList();
 		return resultList.isEmpty() ? null : resultList.get(0);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Student findByUsername(String username) {
-		List<Student>  resultList = em.createNamedQuery("Student.findByUsername").setParameter("username", username).getResultList();
+		List<Student> resultList = em
+				.createNamedQuery("Student.findByUsername")
+				.setParameter("username", username).getResultList();
 		return resultList.isEmpty() ? null : resultList.get(0);
 	}
 
 	@Override
 	public StudentProject getStudentProject(Student student) {
 		// TODO Auto-generated method stub
-		return studentDAO.getStudentProject( student) ;
+		return studentDAO.getStudentProject(student);
 	}
 
 	@Override
@@ -80,10 +85,35 @@ public class StudentServiceImpl implements StudentService {
 
 		studentDAO.save(studentProject);
 	}
-	
-	public void saveOrUpdateStudentProjectStatus(StudentProjectStatus studentProjectStatus)
-	{ 
+
+	public void saveOrUpdateStudentProjectStatus(
+			StudentProjectStatus studentProjectStatus) {
 		studentDAO.saveOrUpdateStudentProjectStatus(studentProjectStatus);
+	}
+
+	@Override
+	public List<StudentProject> getAllSuggestedProjectForSupervisor(
+			Supervisor supervisor) {
+		return studentDAO.getAllSuggestedProjectForSupervisor(supervisor);
+	}
+
+	@Override
+	public void updateSuggestedProjectStatus(StudentProject studentProject) {
+		if (studentProject.getStatus().equals(
+				StudentProjectStatus.ACCEPTED_BY_SUPERVISOR)) {
+			studentProject.setSuggestedSupervisor(studentProject
+					.getSuggestedSupervisor());
+			studentDAO.updateSuggestedProjectStatus(studentProject);
+
+			studentDAO.setStudentProject(studentProject.getStudent(),
+					studentProject.getId());
+
+		}else
+		{
+			studentDAO.updateSuggestedProjectStatus(studentProject);
+
+		}
+
 	}
 
 }

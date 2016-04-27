@@ -1,6 +1,7 @@
 package com.spms.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -26,57 +27,55 @@ public class StudentProjectBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	private StudentProject studentProject;
-	
+
 	private List<Supervisor> supervisors;
-	
+
 	@EJB
 	StudentService studentService;
-	
+
 	@EJB
 	SupervisorService supervisorService;
-	
-	Student student =  (Student) ((HttpSession) FacesContext
+
+
+	Student student = (Student) ((HttpSession) FacesContext
 			.getCurrentInstance().getExternalContext().getSession(true))
 			.getAttribute("currentUser");
 
-	
 	@PostConstruct
-	public void init()
-	{
+	public void init() {
 		supervisors = supervisorService.getAllSupervisors();
-		
-		StudentProject tempStudentProject = studentService.getStudentProject(student);
-		if(tempStudentProject !=null)
-		{
+
+		StudentProject tempStudentProject = studentService
+				.getStudentProject(student);
+		if (tempStudentProject != null) {
 			studentProject = tempStudentProject;
 		}
 		
 	}
-	
-	
-	public void prepareNewStudentProjectToCreate()
-	{
+
+
+	public void prepareNewStudentProjectToCreate() {
 		studentProject = new StudentProject();
 		studentProject.setStudent(student);
 		studentProject.setStatus(StudentProjectStatus.SUGGESTED_BY_STUDENT);
-		
+
 	}
-	
-	
-	public void saveStudentProejct()
-	{
-		
+
+	public void saveStudentProejct() {
+
 		try {
 			studentService.save(studentProject);
-			
-			
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO,
-							"Student Project has been created successfully", ""));
+
+			FacesContext
+					.getCurrentInstance()
+					.addMessage(
+							null,
+							new FacesMessage(
+									FacesMessage.SEVERITY_INFO,
+									"Student Project has been created successfully",
+									""));
 		} catch (Exception ex) {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
@@ -84,34 +83,24 @@ public class StudentProjectBean implements Serializable {
 							"Sorry not able to create Student  project", ""));
 
 		}
-		
-	}
-	
-	
-	
 
+	}
 
 	public StudentProject getStudentProject() {
 		return studentProject;
 	}
 
-
 	public void setStudentProject(StudentProject studentProject) {
 		this.studentProject = studentProject;
 	}
-
 
 	public List<Supervisor> getSupervisors() {
 		return supervisors;
 	}
 
-
 	public void setSupervisors(List<Supervisor> supervisors) {
 		this.supervisors = supervisors;
 	}
-	
-	
-	
-	
 
+	
 }

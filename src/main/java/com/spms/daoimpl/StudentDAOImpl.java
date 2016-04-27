@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import com.spms.dao.StudentDAO;
 import com.spms.dao.SystemUserDAO;
 import com.spms.entity.Admin;
+import com.spms.entity.Project;
 import com.spms.entity.Student;
 import com.spms.entity.StudentProject;
 import com.spms.entity.StudentProjectStatus;
@@ -45,6 +46,28 @@ public class StudentDAOImpl implements StudentDAO {
 			StudentProjectStatus studentProjectStatus) {
 		em.merge(studentProjectStatus);
 		
+	}
+
+	@Override
+	public List<StudentProject> getAllSuggestedProjectForSupervisor(
+			Supervisor supervisor) {
+		Query query = em.createQuery("select x from StudentProject x where x.suggestedSupervisor =:suggestedSupervisor and x.status <> :approved");
+		query.setParameter("approved", StudentProjectStatus.ACCEPTED_BY_SUPERVISOR);
+		query.setParameter("suggestedSupervisor", supervisor);
+		return query.getResultList();
+	} 
+
+	@Override
+	public void setStudentProject(Student student, Integer id) {
+
+		student.setProject(new Project(id));
+		em.merge(student);
+	}
+
+	@Override
+	public void updateSuggestedProjectStatus(StudentProject studentProject) {
+
+		em.merge(studentProject);
 	}
 	
 	

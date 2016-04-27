@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/master.xhtml">
+	<ui:define name="title">
+		<title>Supervisors</title>
+	</ui:define>
+
+	<ui:define name="path">
+		<h:form prependId="false">
+			<p:breadCrumb id="path" style="width:91%;">
+				<p:menuitem value="Home" url="/" />
+				<p:menuitem value="Supervisor" url="/supervisor" />
+			</p:breadCrumb>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+			<p:dataTable value="#{suggestedProjectsBean.studentProjects}"
+				var="studentProject">
+				<p:column headerText="project">
+					<p:outputLabel value="#{studentProject.title}" />
+				</p:column>
+				<p:column headerText="student">
+					<p:outputLabel value="#{studentProject.student.surname}" />
+
+				</p:column>
+				<p:column headerText="status">
+					<p:selectOneMenu value="#{studentProject.status}"  converter="#{studentProjectStatusConverter}"  >
+						<p:ajax event="change"
+							listener="#{suggestedProjectsBean.updateSuggestedProjectStatus}"
+							update="@form" />
+						<f:selectItems
+							value="#{suggestedProjectsBean.studentProjectStatus }"
+							var="status" itemValue="#{status}" itemLabel="#{status.name}"></f:selectItems>
+
+					</p:selectOneMenu>
+					<p:commandButton value="save" actionListener="#{suggestedProjectsBean.save(studentProject)}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+-
+	</ui:define>
+</ui:composition>

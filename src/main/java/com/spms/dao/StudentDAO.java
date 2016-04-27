@@ -1,5 +1,7 @@
 package com.spms.dao;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import com.spms.entity.Admin;
@@ -18,6 +20,13 @@ public interface StudentDAO {
 
 	void saveOrUpdateStudentProjectStatus(
 			StudentProjectStatus studentProjectStatus);
+
+	List<StudentProject> getAllSuggestedProjectForSupervisor(
+			Supervisor supervisor);
+
+	void setStudentProject(Student student, Integer id);
+
+	void updateSuggestedProjectStatus(StudentProject studentProject);
 
 	
 

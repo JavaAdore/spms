@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import com.spms.entity.StudentProjectStatus;
 import com.spms.entity.Supervisor;
 import com.spms.entity.sec.SystemUserGroup;
 import com.spms.service.SupervisorService;
@@ -77,5 +78,11 @@ public class SupervisorServiceImpl implements SupervisorService {
 		if(queryResult.size()>0)
 			return (Supervisor)queryResult.get(0);
 		return null;
+	}
+
+	@Override
+	public StudentProjectStatus findStudentProjectStatus(
+			Integer id) {
+		return em.find(StudentProjectStatus.class, id);
 	}
 }

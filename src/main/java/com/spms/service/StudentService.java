@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.spms.entity.Student;
 import com.spms.entity.StudentProject;
+import com.spms.entity.Supervisor;
 
 public interface StudentService {
 
@@ -24,5 +25,9 @@ public interface StudentService {
 	StudentProject getStudentProject(Student student);
 
 	void save(StudentProject studentProject);
+
+	List<StudentProject> getAllSuggestedProjectForSupervisor(Supervisor student);
+
+	void updateSuggestedProjectStatus(StudentProject studentProject);
 
 }

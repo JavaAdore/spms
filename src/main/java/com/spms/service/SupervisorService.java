@@ -2,6 +2,8 @@ package com.spms.service;
 
 import java.util.List;
 
+import com.spms.entity.StudentProject;
+import com.spms.entity.StudentProjectStatus;
 import com.spms.entity.Supervisor;
 
 public interface SupervisorService {
@@ -21,6 +23,8 @@ public interface SupervisorService {
 	Supervisor findByUsername(String username);
 	
 	Supervisor findSupervisorByStudentId(String studentId);
+
+	StudentProjectStatus findStudentProjectStatus(Integer  id );
 
 
 }
