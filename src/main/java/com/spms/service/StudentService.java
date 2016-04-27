@@ -31,4 +31,5 @@ public interface StudentService {
 
 	void updateSuggestedProjectStatus(StudentProject studentProject);
 
+	Student findBySupervisorId(String supervisorId);
 }

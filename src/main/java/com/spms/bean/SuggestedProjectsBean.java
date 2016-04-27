@@ -17,6 +17,7 @@ import com.spms.entity.StudentProject;
 import com.spms.entity.StudentProjectStatus;
 import com.spms.entity.Supervisor;
 import com.spms.service.StudentService;
+import com.spms.service.SupervisorService;
 
 @ManagedBean
 @ViewScoped
@@ -33,12 +34,15 @@ public class SuggestedProjectsBean implements Serializable {
 	@EJB
 	private StudentService studentService;
 	
+	@EJB
+	private SupervisorService supervisorService;
+		
 	private List<StudentProjectStatus> studentProjectStatus;
 	
 	private StudentProject studentProject;
 
 	private List<StudentProjectStatus> getAllStudentProjectStatus() {
-		List<StudentProjectStatus> list = new ArrayList();
+		List<StudentProjectStatus> list = new ArrayList<>();
 		list.add(StudentProjectStatus.SUGGESTED_BY_STUDENT);
 		list.add(StudentProjectStatus.ACCEPTED_BY_SUPERVISOR);
 		list.add(StudentProjectStatus.REJECTED_BY_SUPERVISOR);
@@ -52,9 +56,11 @@ public class SuggestedProjectsBean implements Serializable {
 
 	}
 	
-	
 	public void save(StudentProject studentProject)
 	{
+		if(studentProject.getStatus().equals(StudentProjectStatus.ACCEPTED_BY_SUPERVISOR))
+			studentProject.setSupervisor(supervisorService.find(supervisor.getId()));
+		
 		studentService.updateSuggestedProjectStatus(studentProject);
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage("Student Project: " + studentProject.getTitle() + " " + studentProject.getStatus().getName()));
