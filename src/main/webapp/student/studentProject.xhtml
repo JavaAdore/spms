@@ -81,6 +81,17 @@
 			<h:form id="createstudentProjectForm">
 				<p:messages id="msgs" escape="false" style="white-space: pre;" />
 				<p:panelGrid id="createstudentProjectPanelGrid" columns="2">
+					
+					<h:outputText value="#{msgs.projectTopic}" />
+					<p:selectOneMenu value="#{studentProjectBean.studentProject.projectTopic}"
+						converter="#{projectTitleConverter}">
+						<f:selectItems value="#{studentProjectBean.projectTopics}"
+							var="projectTopic" itemValue="#{projectTopic}"
+							itemLabel="#{projectTopic.topicTitle }" />
+					</p:selectOneMenu>
+					
+					
+					
 					<h:outputText value="#{msgs.name}" />
 					<p:inputText id="name"
 						value="#{studentProjectBean.studentProject.title}" required="true"

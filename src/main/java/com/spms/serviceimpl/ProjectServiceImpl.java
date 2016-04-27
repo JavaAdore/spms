@@ -128,6 +128,11 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectDAO.findProjectTopic(integer);
 	}
 
+	@Override
+	public List<ProjectTopic> getAllProjectTopics() {
+		return projectDAO.getAllProjectTopics();
+	}
+
 	
 
 }

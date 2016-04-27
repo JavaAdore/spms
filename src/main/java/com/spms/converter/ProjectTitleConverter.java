@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
 import com.spms.entity.ProjectTitle;
+import com.spms.entity.ProjectTopic;
 import com.spms.entity.StudentProjectStatus;
 import com.spms.entity.Supervisor;
 import com.spms.service.ProjectService;
@@ -38,7 +39,7 @@ public class ProjectTitleConverter implements Converter{
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
 		try
 		{
-			return ((ProjectTitle)arg2).getId()+"";
+			return ((ProjectTopic)arg2).getId()+"";
 		}catch(Exception ex)
 		{
 			return "";

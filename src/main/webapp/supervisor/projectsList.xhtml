@@ -4,11 +4,11 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/template/master.xhtml">
-	
+
 	<ui:define name="title">
 		<title>Projects</title>
 	</ui:define>
-	
+
 	<ui:define name="path">
 		<h:form prependId="false">
 			<p:breadCrumb id="path" style="width:91%;">
@@ -16,7 +16,7 @@
 			</p:breadCrumb>
 		</h:form>
 	</ui:define>
-	
+
 	<ui:define name="content">
 
 		<p:dialog dynamic="true" id="createProjectDialog"
@@ -26,19 +26,29 @@
 			<h:form id="createProjectForm">
 				<p:messages id="msgs" escape="false" style="white-space: pre;" />
 				<p:panelGrid id="createProjectPanelGrid" columns="2">
-					
+
+					<h:outputText value="#{msgs.projectTopic}" />
+					<p:selectOneMenu value="#{projectsBean.project.projectTopic}"
+						converter="#{projectTitleConverter}">
+						<f:selectItems value="#{projectsBean.projectTopics}"
+							var="projectTopic" itemValue="#{projectTopic}"
+							itemLabel="#{projectTopic.topicTitle }" />
+					</p:selectOneMenu>
+
+
 					<h:outputText value="#{msgs.title}" />
 					<p:inputText id="name" value="#{projectsBean.project.title}"
 						required="true" requiredMessage="#{msgs.name}: #{msgs.emptyValue}"
 						style="width: 250px;" />
-						
+
 					<h:outputText value="#{msgs.description}" />
 					<p:inputTextarea id="description"
 						value="#{projectsBean.project.description}" style="width: 250px;" />
-					
+
 					<h:outputText value="#{msgs.requiredSkills}" />
 					<p:inputTextarea id="surname"
-						value="#{projectsBean.project.requiredSkills}" style="width: 250px;" />
+						value="#{projectsBean.project.requiredSkills}"
+						style="width: 250px;" />
 
 				</p:panelGrid>
 				<p />
@@ -51,20 +61,30 @@
 				</center>
 			</h:form>
 		</p:dialog>
-		
-		<p:dialog dynamic="true" id="editProject"
-			header="#{msgs.editProject}" widgetVar="editProject" modal="true"
-			showEffect="fade" hideEffect="fade" resizable="false"
-			style="width: 60%;">
+
+		<p:dialog dynamic="true" id="editProject" header="#{msgs.editProject}"
+			widgetVar="editProject" modal="true" showEffect="fade"
+			hideEffect="fade" resizable="false" style="width: 60%;">
 			<h:form id="editProjectForm">
 				<p:messages id="msgs" escape="false" style="white-space: pre;" />
 				<p:panelGrid id="createProjectPanelGrid" columns="2">
-					
+
+
+					<h:outputText value="#{msgs.projectTopic}" />
+					<p:selectOneMenu value="#{projectsBean.project.projectTopic}"
+						converter="#{projectTitleConverter}">
+						<f:selectItems value="#{projectsBean.projectTopics}"
+							var="projectTopic" itemValue="#{projectTopic}"
+							itemLabel="#{projectTopic.topicTitle }" />
+					</p:selectOneMenu>
+
+
+
 					<h:outputText value="#{msgs.title}" />
 					<p:inputText id="name" value="#{projectsBean.project.title}"
 						required="true" requiredMessage="#{msgs.name}: #{msgs.emptyValue}"
 						style="width: 250px;" />
-					
+
 					<h:outputText value="#{msgs.description}" />
 					<p:inputTextarea id="description"
 						value="#{projectsBean.project.description}" style="width: 250px;" />
@@ -85,7 +105,7 @@
 				</center>
 			</h:form>
 		</p:dialog>
-		
+
 		<h:form id="projectDataTableForm">
 			<p:dataTable id="projectDataTable"
 				value="#{projectsBean.supervisorProjects}" var="project"
@@ -98,14 +118,12 @@
 				<p:column headerText="ID">
 					<p:commandLink value="#{project.id}"
 						actionListener="#{projectsBean.setProject(project)}"
-						oncomplete="PF('editProject').show()"
-						update="editProjectForm" />
+						oncomplete="PF('editProject').show()" update="editProjectForm" />
 				</p:column>
 				<p:column headerText="#{msgs.title}">
 					<p:commandLink value="#{project.title}"
 						actionListener="#{projectsBean.setProject(project)}"
-						oncomplete="PF('editProject').show()"
-						update="editProjectForm" />
+						oncomplete="PF('editProject').show()" update="editProjectForm" />
 				</p:column>
 				<p:column headerText="Project Description">
 					<h:outputText value="#{project.description}" />

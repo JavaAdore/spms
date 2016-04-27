@@ -83,7 +83,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public void save(StudentProject studentProject)
+	public StudentProject save(StudentProject studentProject)
 			throws StudentAlreadyAssignedToProjectException {
 
 		Student student = studentDAO.findStudent(studentProject.getStudent().getId()); 
@@ -93,7 +93,7 @@ public class StudentServiceImpl implements StudentService {
 		if (student.getProject() != null || persistedStudentProject != null) {
 			throw new StudentAlreadyAssignedToProjectException();
 		}
-		studentDAO.save(studentProject);
+		return studentDAO.save(studentProject);
 	}
 
 	public void saveOrUpdateStudentProjectStatus(

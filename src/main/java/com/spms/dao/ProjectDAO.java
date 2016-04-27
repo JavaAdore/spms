@@ -22,4 +22,6 @@ public interface ProjectDAO {
 
 	ProjectTopic findProjectTopic(Integer integer);
 
+	List<ProjectTopic> getAllProjectTopics();
+
 }
