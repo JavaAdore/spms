@@ -106,7 +106,7 @@ public class StudentManagerView implements Serializable {
 
 	public void deleteSelectedStudent() {
 		studentService.delete(selectedStudent);
-		systemUserGroupService.delete(selectedStudent.getUsername(), "user");
+		systemUserGroupService.delete(selectedStudent.getUsername(), "student");
 		studentList.remove(selectedStudent);
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage("Student: " + selectedStudent.getUsername() + " successfully deleted."));

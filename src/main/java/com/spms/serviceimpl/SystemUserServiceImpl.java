@@ -2,7 +2,6 @@ package com.spms.serviceimpl;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -50,12 +49,12 @@ public class SystemUserServiceImpl implements SystemUserService {
 				.setParameter("username", username).getResultList();
 		return resultList.isEmpty() ? null : resultList.get(0);
 	}
-
+	
 	@Override
 	public Admin findAdministratorByUserName(String userName) {
 		return systemUserDAO.findAdministratorByUserName(userName);
 	}
-
+	
 	@Override
 	public Supervisor findSupervisorByUserName(String userName) {
 		return systemUserDAO.findSupervisorByUserName(userName);
@@ -72,8 +71,9 @@ public class SystemUserServiceImpl implements SystemUserService {
 				.findAdministratorByUserName("admin1");
 		if (systemUser == null) {
 			Admin admin = new Admin();
+			admin.setName("Admin1 name");
 			admin.setUsername("admin1");
-			admin.setSurname("admin1");
+			admin.setSurname("admin1 surname");
 			admin.setEmail("admin1@admin1.com");
 			admin.setPassword(Util.hashPassword("admin1"));
 			systemUserDAO.saveAdmin(admin);
