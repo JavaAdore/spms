@@ -20,9 +20,10 @@ public class SystemUserDAOImpl implements SystemUserDAO {
 	EntityManager em;
 	
 	
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Admin findAdministratorByUserName(String userName) {
-		Query query = em.createQuery("select x from  Admin x where x.username =:username ");
+		Query query = em.createQuery("SELECT model FROM Admin model where model.username =:username ");
 		query.setParameter("username", userName);
 		List queryResult = query.getResultList();
 		if(queryResult.size()>0)
@@ -32,9 +33,10 @@ public class SystemUserDAOImpl implements SystemUserDAO {
 		return null;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Supervisor findSupervisorByUserName(String userName) {
-		Query query = em.createQuery("select x from  Supervisor x where x.username =:username ");
+		Query query = em.createQuery("SELECT model FROM Supervisor model where model.username =:username ");
 		query.setParameter("username", userName);
 		List queryResult = query.getResultList();
 		if(queryResult.size()>0)
@@ -44,9 +46,10 @@ public class SystemUserDAOImpl implements SystemUserDAO {
 		return null;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Student findStudentByUserName(String userName) {
-		Query query = em.createQuery("select x from  Student x where x.username =:username ");
+		Query query = em.createQuery("SELECT model FROM Student model where model.username =:username ");
 		query.setParameter("username", userName);
 		List queryResult = query.getResultList();
 		if(queryResult.size()>0)

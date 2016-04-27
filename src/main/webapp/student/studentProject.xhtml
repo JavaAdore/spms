@@ -12,7 +12,7 @@
 		<h:form prependId="false">
 			<p:breadCrumb id="path" style="width:91%;">
 				<p:menuitem value="Home" url="/" />
-				<p:menuitem value="studentProjects" url="/studentProject" />
+				<p:menuitem value="studentProjects" url="/student/studentProject.xhtml" />
 			</p:breadCrumb>
 		</h:form>
 	</ui:define>
@@ -34,7 +34,6 @@
 						<p:outputLabel value="#{studentProjectBean.studentProject.title }" />
 					</p:column>
 				</p:row>
-
 				<p:row>
 					<p:column>
 						<p:outputLabel value="projcet description" />
@@ -45,7 +44,6 @@
 							value="#{studentProjectBean.studentProject.description}" />
 					</p:column>
 				</p:row>
-
 				<p:row>
 					<p:column>
 						<p:outputLabel value="projcet supervisor" />
@@ -56,7 +54,6 @@
 							value="#{studentProjectBean.studentProject.suggestedSupervisor.surname}" />
 					</p:column>
 				</p:row>
-
 				<p:row>
 					<p:column>
 						<p:outputLabel value="projcet status" />
@@ -67,20 +64,18 @@
 							value="#{studentProjectBean.studentProject.status.name}" />
 					</p:column>
 				</p:row>
-
 			</p:panelGrid>
 
 			<br />
 			<p:commandButton value="Add Project Proposal" rendered="#{studentProjectBean.studentProject.id==null}"
 				update="createstudentProjectForm @this" actionListener="#{studentProjectBean.prepareNewStudentProjectToCreate()}"
 				oncomplete="PF('createstudentProjectDialogWidget').show()" />
-
-
+			
 		</h:form>
 
 
 		<p:dialog dynamic="true" id="createstudentProjectDialog"
-			header="#{msgs.newstudentProject}"
+			header="#{msgs.newStudentProject}"
 			widgetVar="createstudentProjectDialogWidget" modal="true"
 			showEffect="fade" hideEffect="fade" resizable="false"
 			style="width: 40%;">
@@ -92,23 +87,21 @@
 						value="#{studentProjectBean.studentProject.title}" required="true"
 						requiredMessage="#{msgs.name}: #{msgs.emptyValue}"
 						style="width: 250px;" />
-
-
+					
 					<h:outputText value="#{msgs.projectDescription}" />
 					<p:inputTextarea id="ssurname"
 						value="#{studentProjectBean.studentProject.description}"
 						style="width: 250px;" />
-
+					
 					<h:outputText value="#{msgs.requiredSkills}" />
 					<p:inputTextarea id="surname"
 						value="#{studentProjectBean.studentProject.requiredSkills}"
 						style="width: 250px;" />
-					<h:outputText value="#{msgs.superVisor}" />
+					<h:outputText value="#{msgs.supervisor}" />
 					<p:selectOneMenu value="#{studentProjectBean.studentProject.suggestedSupervisor}" converter="#{supervisorConverter}">
 						<f:selectItems value="#{studentProjectBean.supervisors}"  var="superVisor"  itemLabel="#{superVisor.surname}" itemValue="#{superVisor}"  />
 					</p:selectOneMenu>
-
-
+				
 				</p:panelGrid>
 				<p />
 				<center>
