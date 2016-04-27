@@ -11,11 +11,12 @@
 		<p:menuitem value="Projects" url="/supervisor/projectsList.xhtml" />
 		<p:menuitem value="Topics" url="/supervisor/projectTopics.xhtml" />
 		<p:menuitem value="Suggested Projects" url="/supervisor/suggestedProjects.xhtml" />
+		<p:menuitem value="Accept Reject Student" url="/supervisor/acceptRejectStudent.xhtml" />
 	</p:submenu>
 	
 	<p:submenu label="Students" rendered="#{sessionBean.student}">
+	<p:menuitem value="Ask to join project" url="/student/askToJoinProject.xhtml" />
 		<p:menuitem value="Student Project" url="/student/studentProject.xhtml" />
-		<p:menuitem value="Ask to join project" url="/student/AskToJoinProject.xhtml" />
 	</p:submenu>
 	
 </ui:composition>

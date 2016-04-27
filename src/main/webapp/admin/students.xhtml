@@ -19,6 +19,23 @@
 		<ui:include src="create.xhtml" />
 		<ui:include src="edit.xhtml" />
 	
+		<p:dialog dynamic="true" id="studentProjectDialog" header="Project" widgetVar="studentProjectDialogWidget" modal="true" 
+			showEffect="fade" hideEffect="fade" resizable="false" style="width: 40%;">
+			<h:outputText value="No Project Selected" style="width: 100px;" rendered="empty studentManagerView.selectedStudent.project"/>
+			<h:form id="studentProjectForm" width="100%" rendered="not empty studentManagerView.selectedStudent.project">
+				<p:panelGrid id="studentProjectPanel" columns="2" style="width: 100%">
+					<h:outputText value="#{msgs.id}" style="width: 100px;" />
+					<h:outputText value="#{studentManagerView.selectedStudent.project.id}" />
+					
+					<h:outputText value="#{msgs.title}" />
+					<h:outputText value="#{studentManagerView.selectedStudent.project.title}" />
+					
+					<h:outputText value="#{msgs.description}" />
+					<h:outputText value="#{studentManagerView.selectedStudent.project.description}" />
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+		
 		<p:confirmDialog dynamic="true" id="deleteStudentDialog" widgetVar="deleteStudentDialogWidget" header="#{msgs.areYouSure}">
 			<f:facet name="message">
 				<h:outputText value="#{msgs.pleaseConfirmYouWantToDelete}: #{studentManagerView.selectedStudent.username}" />
@@ -49,8 +66,9 @@
 			<p:column headerText="Username" >
 				<h:outputText value="#{student.username}" />
 			</p:column>
-			<p:column headerText="Password" >
-				<h:outputText value="#{student.password}" />
+			<p:column headerText="Project" >
+				<p:commandLink value="#{student.project.title}" actionListener="#{studentManagerView.setSelectedStudent(student)}" oncomplete="PF('studentProjectDialogWidget').show()"
+					update="studentProjectDialog" />
 			</p:column>
 					
 			<p:column width="70" >

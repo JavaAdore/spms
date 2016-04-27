@@ -19,6 +19,27 @@
 		<ui:include src="create.xhtml" />
 		<ui:include src="edit.xhtml" />
 	
+		<p:dialog dynamic="true" id="supervisorProjectsDialog" header="Projects" widgetVar="supervisorProjectsDialogWidget" modal="true" 
+			showEffect="fade" hideEffect="fade" resizable="false" style="width: 40%;">
+			<h:form id="supervisorProjectsForm">
+				<p:dataTable id="supervisorProjectsDataTable" value="#{supervisorManagerView.selectedSupervisor.prjects}" var="project" emptyMessage="#{msgs.noResultsFound}" rows="10" 
+					paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" style="width: 93%">
+					<f:facet name="header" >
+						<h:outputText value="Projects" />
+					</f:facet>
+					<p:column headerText="#{msgs.id}" >
+						<h:outputText value="#{project.id}" />
+					</p:column>
+					<p:column headerText="#{msgs.title}" >
+						<h:outputText value="#{project.title}" />
+					</p:column>
+					<p:column headerText="#{msgs.description}" >
+						<h:outputText value="#{project.description}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</p:dialog>
+	
 		<p:confirmDialog dynamic="true" id="deleteSupervisorDialog" widgetVar="deleteSupervisorDialogWidget" header="#{msgs.areYouSure}">
 			<f:facet name="message">
 				<h:outputText value="#{msgs.pleaseConfirmYouWantToDelete}: #{supervisorManagerView.selectedSupervisor.username}" />
@@ -49,8 +70,11 @@
 			<p:column headerText="Username" >
 				<h:outputText value="#{supervisor.username}" />
 			</p:column>
-			<p:column headerText="Password" >
-				<h:outputText value="#{supervisor.password}" />
+			<p:column headerText="Projects" >
+				<center>
+					<p:commandLink value="#{supervisor.prjects.size()}" actionListener="#{supervisorManagerView.setSelectedSupervisor(supervisor)}" oncomplete="PF('supervisorProjectsDialogWidget').show()"
+						update="supervisorProjectsDialog" />
+				</center>
 			</p:column>
 					
 			<p:column width="70" >

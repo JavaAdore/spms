@@ -60,7 +60,7 @@ public class LoginBean implements Serializable {
 				systemUser = systemUserService.findStudentByUserName(userName);
 
 				FacesContext.getCurrentInstance().getExternalContext()
-						.redirect("student/studentProject.xhtml");
+						.redirect("student/askToJoinProject.xhtml");
 
 			}
 			

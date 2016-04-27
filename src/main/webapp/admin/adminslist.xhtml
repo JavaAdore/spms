@@ -27,10 +27,6 @@
 		<p:column headerText="Username" >
 			<h:outputText value="#{admin.username}" />
 		</p:column>
-		<p:column headerText="Password" >
-			<h:outputText value="#{admin.password}" />
-		</p:column>
-				
 		<p:column width="70" >
 			<f:facet name="header">
 				<p:commandButton id="createButton" icon="ui-icon-plus" title="#{msgs.create}" actionListener="#{adminManagerView.beforeCreateNewAdmin}"

@@ -5,22 +5,19 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/template/master.xhtml">
 	<ui:define name="title">
-		<title>Student Project</title>
+		<title>Ask To Join Project</title>
 	</ui:define>
 
 	<ui:define name="path">
 		<h:form prependId="false">
 			<p:breadCrumb id="path" style="width:91%;">
-				<p:menuitem value="Ask to join project" url="/student/AskToJoinProject.xhtml" />
+				<p:menuitem value="Ask to join project" url="/student/askToJoinProject.xhtml" />
 			</p:breadCrumb>
 		</h:form>
 	</ui:define>
 
 	<ui:define name="content">
-
-
 		<h:form id="suggestedProjectForm">
-
 			<p:growl />
 			<p:panelGrid
 				rendered="#{joinProjectRequestBean.student.project !=null}">
@@ -33,7 +30,6 @@
 					<p:column>
 						<p:outputLabel value="projcet title" />
 					</p:column>
-
 					<p:column>
 						<p:outputLabel
 							value="#{joinProjectRequestBean.student.project.title }" />
@@ -43,7 +39,6 @@
 					<p:column>
 						<p:outputLabel value="projcet description" />
 					</p:column>
-
 					<p:column>
 						<p:outputLabel
 							value="#{joinProjectRequestBean.student.project.description}" />
@@ -61,12 +56,8 @@
 				</p:row>
 			</p:panelGrid>
 
-
-
-			<p:dataTable
-				rendered="#{joinProjectRequestBean.student.project == null}"
-				value="#{joinProjectRequestBean.joinalbeProjects}"
-				var="joinalbeProject">
+			<p:dataTable rendered="#{joinProjectRequestBean.student.project == null}"
+				value="#{joinProjectRequestBean.joinalbeProjects}" var="joinalbeProject" style="width: 93%">
 				<p:column headerText="Project">
 					<p:outputLabel value="#{joinalbeProject.title}" />
 				</p:column>
@@ -77,13 +68,9 @@
 					<p:commandButton value="Ask To Join Project"
 						actionListener="#{joinProjectRequestBean.requiredToJoinProject(joinalbeProject)}"
 						update="@form" />
-
 				</p:column>
-
 			</p:dataTable>
-
 			<br />
-
 
 		</h:form>
 	</ui:define>

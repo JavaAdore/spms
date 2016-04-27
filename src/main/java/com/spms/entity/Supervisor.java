@@ -1,12 +1,14 @@
 package com.spms.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -31,6 +33,9 @@ public class Supervisor extends SystemUser implements Serializable {
 	@Column(name = "telephone_number")
 	private String telephoneNumber;
 	
+	@OneToMany(mappedBy = "supervisor")
+	private List<Project> prjects;
+	
 	public String getSupervisorId() {
 		return supervisorId;
 	}
@@ -53,6 +58,14 @@ public class Supervisor extends SystemUser implements Serializable {
 
 	public void setTelephoneNumber(String telephoneNumber) {
 		this.telephoneNumber = telephoneNumber;
+	}
+	
+	public List<Project> getPrjects() {
+		return prjects;
+	}
+	
+	public void setPrjects(List<Project> prjects) {
+		this.prjects = prjects;
 	}
 
 	@Override
