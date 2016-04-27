@@ -86,7 +86,7 @@ public class StudentServiceImpl implements StudentService {
 	public void save(StudentProject studentProject)
 			throws StudentAlreadyAssignedToProjectException {
 
-		Student student = studentDAO.findStudent(studentProject.getId());
+		Student student = studentDAO.findStudent(studentProject.getStudent().getId()); 
 		StudentProject persistedStudentProject = studentDAO
 				.getStudentProject(student);
 

@@ -4,10 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "student_project")
+@PrimaryKeyJoinColumn(name="id")
+
 public class StudentProject extends Project implements Serializable {
 
 	private static final long serialVersionUID = 1L;

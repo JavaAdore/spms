@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import com.spms.dao.StudentDAO;
 import com.spms.dao.SystemUserDAO;
 import com.spms.entity.Admin;
+import com.spms.entity.JoinProjectRequest;
 import com.spms.entity.Project;
 import com.spms.entity.Student;
 import com.spms.entity.StudentProject;
@@ -38,7 +39,7 @@ public class StudentDAOImpl implements StudentDAO {
 	@Override
 	public void save(StudentProject studentProject) {
 		
-		em.persist(studentProject);
+		em.merge(studentProject);
 	}
 
 	@Override
@@ -73,6 +74,23 @@ public class StudentDAOImpl implements StudentDAO {
 	@Override
 	public Student findStudent(Integer id) {
 		return em.find(Student.class, id);
+	}
+
+	@Override
+	public JoinProjectRequest getStudentProjectRequest(Student student) {
+		Query query = em.createQuery("select x from JoinProjectRequest x where x.student =:student");
+		query.setParameter("student", student);
+		List queryResult = query.getResultList();
+		if(queryResult.isEmpty()==false)
+		{
+			return (JoinProjectRequest) queryResult.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public void updateStudent(Student student) {
+		em.merge(student);		
 	}
 	
 	
