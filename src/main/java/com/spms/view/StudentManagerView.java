@@ -72,10 +72,10 @@ public class StudentManagerView implements Serializable {
 		newStudent = studentService.create(newStudent);
 		studentList.add(newStudent);
 		
-		SystemUserGroup systemUserGroup = systemUserGroupService.find(newStudent.getUsername(), "user");
+		SystemUserGroup systemUserGroup = systemUserGroupService.find(newStudent.getUsername(), "student");
 		if(systemUserGroup == null){
 			systemUserGroup = new SystemUserGroup();
-			systemUserGroupService.create(newStudent.getUsername(), "user");
+			systemUserGroupService.create(newStudent.getUsername(), "student");
 		}
 		
 		FacesContext.getCurrentInstance().addMessage(null,
