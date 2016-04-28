@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.spms.entity.Project;
 import com.spms.entity.Student;
+import com.spms.exception.JoinRequestSentBeforeException;
 import com.spms.exception.StudentAlreadyAssignedToProjectException;
 import com.spms.service.ProjectService;
 import com.spms.service.StudentService;
@@ -25,7 +26,7 @@ public class JoinProjectRequestBean implements Serializable {
 
 	@EJB
 	private ProjectService projectService;
-	
+
 	@EJB
 	StudentService studentService;
 
@@ -37,8 +38,7 @@ public class JoinProjectRequestBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		
-		
+
 		joinalbeProjects = projectService.getJoinableProjects();
 		refreshStudent();
 	}
@@ -58,20 +58,24 @@ public class JoinProjectRequestBean implements Serializable {
 									FacesMessage.SEVERITY_INFO,
 									"Your request has been sent successfuly to your supervisor",
 									""));
-			
+
 			refreshStudent();
 		} catch (StudentAlreadyAssignedToProjectException ex) {
-			FacesContext
-			.getCurrentInstance()
-			.addMessage(
+			FacesContext.getCurrentInstance().addMessage(
 					null,
-					new FacesMessage(
-							FacesMessage.SEVERITY_INFO,
+					new FacesMessage(FacesMessage.SEVERITY_INFO,
 							"you have already been assigned to other project",
 							""));
-		}
-
-		catch (Exception ex) {
+		} catch (JoinRequestSentBeforeException e) {
+			FacesContext
+					.getCurrentInstance()
+					.addMessage(
+							null,
+							new FacesMessage(
+									FacesMessage.SEVERITY_INFO,
+									"you have already asked to join project before",
+									""));
+		} catch (Exception ex) {
 
 		}
 	}

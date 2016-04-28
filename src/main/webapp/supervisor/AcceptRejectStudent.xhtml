@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/master.xhtml">
+	<ui:define name="title">
+		<title>Supervisors</title>
+	</ui:define>
+
+	<ui:define name="path">
+		<h:form prependId="false">
+			<p:breadCrumb id="path" style="width:91%;">
+				<p:menuitem value="Suggested Projects"
+					url="/supervisor/suggestedProjects.xhtml" />
+			</p:breadCrumb>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+			<p:dataTable value="#{projectJoinRequestsBean.joinRequests}"
+				var="joinRequest">
+				<p:column headerText="project">
+					<p:outputLabel value="#{joinRequest.project.title}" />
+				</p:column>
+				<p:column headerText="student">
+					<p:outputLabel value="#{joinRequest.student.surname}" />
+
+				</p:column>
+
+				<p:column headerText="Accept/Reject">
+					<p:commandButton value="Accept"
+						actionListener="#{projectJoinRequestsBean.acceptProject(joinRequest)}"
+						update="@form" />
+					<p:commandButton value="Reject"
+						actionListener="#{projectJoinRequestsBean.reject(joinRequest)}"
+						update="@form" />
+
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+-
+	</ui:define>
+</ui:composition>

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import com.spms.entity.Admin;
+import com.spms.entity.JoinProjectRequest;
 import com.spms.entity.Student;
 import com.spms.entity.StudentProject;
 import com.spms.entity.StudentProjectStatus;
@@ -29,6 +30,10 @@ public interface StudentDAO {
 	void updateSuggestedProjectStatus(StudentProject studentProject);
 
 	Student findStudent(Integer id);
+
+	JoinProjectRequest getStudentProjectRequest(Student student);
+
+	void updateStudent(Student student);
 
 	
 
