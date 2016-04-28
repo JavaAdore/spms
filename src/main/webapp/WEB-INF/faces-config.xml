@@ -5,7 +5,7 @@
 	    
 	<application>
 		<resource-bundle>
-			<base-name>com.spms.message</base-name>
+			<base-name>message</base-name>
 			<var>msgs</var>
 		</resource-bundle>
 		<locale-config>
