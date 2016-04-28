@@ -21,9 +21,9 @@
 	
 		<p:dialog dynamic="true" id="studentProjectDialog" header="Project" widgetVar="studentProjectDialogWidget" modal="true" 
 			showEffect="fade" hideEffect="fade" resizable="false" style="width: 40%;">
-			<h:outputText value="No Project Selected" style="width: 100px;" rendered="empty studentManagerView.selectedStudent.project"/>
-			<h:form id="studentProjectForm" width="100%" rendered="not empty studentManagerView.selectedStudent.project">
-				<p:panelGrid id="studentProjectPanel" columns="2" style="width: 100%">
+			<h:outputText value="No Project Selected" style="width: 100px;" rendered="#{empty studentManagerView.selectedStudent.project}"/>
+<!-- 			<h:form id="studentProjectForm" width="100%" rendered="#{not empty studentManagerView.selectedStudent.project}"> -->
+				<p:panelGrid id="studentProjectPanel" columns="2" style="width: 100%" rendered="#{not empty studentManagerView.selectedStudent.project}">
 					<h:outputText value="#{msgs.id}" style="width: 100px;" />
 					<h:outputText value="#{studentManagerView.selectedStudent.project.id}" />
 					
@@ -33,7 +33,7 @@
 					<h:outputText value="#{msgs.description}" />
 					<h:outputText value="#{studentManagerView.selectedStudent.project.description}" />
 				</p:panelGrid>
-			</h:form>
+<!-- 			</h:form> -->
 		</p:dialog>
 		
 		<p:confirmDialog dynamic="true" id="deleteStudentDialog" widgetVar="deleteStudentDialogWidget" header="#{msgs.areYouSure}">
@@ -42,47 +42,48 @@
 			</f:facet>
 			<h:form id="deleteStudentForm">
 				<p:commandButton value="#{msgs.yes}" icon="ui-icon-check" actionListener="#{studentManagerView.deleteSelectedStudent()}"
-					oncomplete="PF('deleteStudentDialogWidget').hide();" update="studentsDataTable" />
+					oncomplete="PF('deleteStudentDialogWidget').hide();" update="studentsForm:studentsDataTable" />
 				<p:commandButton value="#{msgs.no}" icon="ui-icon-close" onclick="PF('deleteStudentDialogWidget').hide();" />
 			</h:form>
 		</p:confirmDialog>
 		
-		<p:dataTable id="studentsDataTable" value="#{studentManagerView.studentList}" var="student" emptyMessage="#{msgs.noResultsFound}" rows="10" 
-			paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" style="width: 93%">
-			<f:facet name="header" >
-				<h:outputText value="Students" />
-			</f:facet>
-			<p:column headerText="#{msgs.id}" >
-				<p:commandLink value="#{student.studentId}" actionListener="#{studentManagerView.setSelectedStudent(student)}" oncomplete="PF('editStudentDialogWidget').show()"
-					update="editStudentDialog" />
-			</p:column>
-			<p:column headerText="#{msgs.name}" >
-				<p:commandLink value="#{student.name}" actionListener="#{studentManagerView.setSelectedStudent(student)}" oncomplete="PF('editStudentDialogWidget').show()"
-					update="editStudentDialog" />
-			</p:column>
-			<p:column headerText="Email" >
-				<h:outputText value="#{student.email}" />
-			</p:column>
-			<p:column headerText="Username" >
-				<h:outputText value="#{student.username}" />
-			</p:column>
-			<p:column headerText="Project" >
-				<p:commandLink value="#{student.project.title}" actionListener="#{studentManagerView.setSelectedStudent(student)}" oncomplete="PF('studentProjectDialogWidget').show()"
-					update="studentProjectDialog" />
-			</p:column>
-					
-			<p:column width="70" >
-				<f:facet name="header">
-					<p:commandButton id="createButton" icon="ui-icon-plus" title="#{msgs.create}" actionListener="#{studentManagerView.beforeCreateNewStudent()}"
-						oncomplete="PF('createStudentDialogWidget').show()" update="createStudentDialog" />
+		<h:form id="studentsForm" >
+			<p:dataTable id="studentsDataTable" value="#{studentManagerView.studentList}" var="student" emptyMessage="#{msgs.noResultsFound}" rows="10" 
+				paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" style="width: 93%">
+				<f:facet name="header" >
+					<h:outputText value="Students" />
 				</f:facet>
-				<center>
-					<p:commandButton id="deleteButton" icon="ui-icon-trash" title="#{msgs.delete}" actionListener="#{studentManagerView.setSelectedStudent(student)}"
-	 					oncomplete="PF('deleteStudentDialogWidget').show()" update="deleteStudentDialog" />
-				</center>
-			</p:column>
-					
-		</p:dataTable>
-		
+				<p:column headerText="#{msgs.id}" >
+					<p:commandLink value="#{student.studentId}" actionListener="#{studentManagerView.setSelectedStudent(student)}" oncomplete="PF('editStudentDialogWidget').show()"
+						update="editStudentDialog" />
+				</p:column>
+				<p:column headerText="#{msgs.name}" >
+					<p:commandLink value="#{student.name}" actionListener="#{studentManagerView.setSelectedStudent(student)}" oncomplete="PF('editStudentDialogWidget').show()"
+						update="editStudentDialog" />
+				</p:column>
+				<p:column headerText="Email" >
+					<h:outputText value="#{student.email}" />
+				</p:column>
+				<p:column headerText="Username" >
+					<h:outputText value="#{student.username}" />
+				</p:column>
+				<p:column headerText="Project" >
+					<p:commandLink value="#{student.project.title}" actionListener="#{studentManagerView.setSelectedStudent(student)}" oncomplete="PF('studentProjectDialogWidget').show()"
+						update="studentProjectDialog" />
+				</p:column>
+						
+				<p:column width="70" >
+					<f:facet name="header">
+						<p:commandButton id="createButton" icon="ui-icon-plus" title="#{msgs.create}" actionListener="#{studentManagerView.beforeCreateNewStudent()}"
+							oncomplete="PF('createStudentDialogWidget').show()" update="createStudentDialog" />
+					</f:facet>
+					<center>
+						<p:commandButton id="deleteButton" icon="ui-icon-trash" title="#{msgs.delete}" actionListener="#{studentManagerView.setSelectedStudent(student)}"
+		 					oncomplete="PF('deleteStudentDialogWidget').show()" update="deleteStudentDialog" />
+					</center>
+				</p:column>
+						
+			</p:dataTable>
+		</h:form>
 	</ui:define>
 </ui:composition>

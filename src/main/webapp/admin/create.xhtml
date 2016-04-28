@@ -113,7 +113,7 @@
 			</p:panelGrid>
 			<p />
 			<center>
-				<p:commandButton value="#{msgs.create}" title="#{msgs.create}" actionListener="#{studentManagerView.createNewStudent()}" update="@form studentsDataTable growl"
+				<p:commandButton value="#{msgs.create}" title="#{msgs.create}" actionListener="#{studentManagerView.createNewStudent()}" update="@form studentsForm:studentsDataTable growl"
 					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('createStudentDialogWidget').hide();" ignoreAutoUpdate="true" process="@form"/>
 			</center>
 		</h:form>

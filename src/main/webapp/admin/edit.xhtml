@@ -113,7 +113,7 @@
 			</p:panelGrid>
 			<p />
 			<center>
-				<p:commandButton value="#{msgs.edit}" title="#{msgs.edit}" actionListener="#{studentManagerView.updateSelectedStudent()}" update="@form studentsDataTable"
+				<p:commandButton value="#{msgs.edit}" title="#{msgs.edit}" actionListener="#{studentManagerView.updateSelectedStudent()}" update="@form studentsForm:studentsDataTable"
 					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('editStudentDialogWidget').hide();" process="@form"/>
 			</center>
 		</h:form>

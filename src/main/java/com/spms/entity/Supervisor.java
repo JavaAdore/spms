@@ -6,11 +6,13 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.spms.entity.sec.SystemUser;
 
@@ -33,7 +35,7 @@ public class Supervisor extends SystemUser implements Serializable {
 	@Column(name = "telephone_number")
 	private String telephoneNumber;
 	
-	@OneToMany(mappedBy = "supervisor")
+	@OneToMany(mappedBy = "supervisor", fetch = FetchType.EAGER)
 	private List<Project> prjects;
 	
 	public String getSupervisorId() {
@@ -60,6 +62,7 @@ public class Supervisor extends SystemUser implements Serializable {
 		this.telephoneNumber = telephoneNumber;
 	}
 	
+	@XmlTransient
 	public List<Project> getPrjects() {
 		return prjects;
 	}

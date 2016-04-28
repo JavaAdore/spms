@@ -29,7 +29,7 @@
 
 					<h:outputText value="#{msgs.projectTopic}" />
 					<p:selectOneMenu value="#{projectsBean.project.projectTopic}"
-						converter="#{projectTitleConverter}">
+						converter="#{projectTitleConverter}" required="true" requiredMessage="#{msgs.projectTopic}: #{msgs.emptyValue}">
 						<f:selectItems value="#{projectsBean.projectTopics}"
 							var="projectTopic" itemValue="#{projectTopic}"
 							itemLabel="#{projectTopic.topicTitle }" />
@@ -38,7 +38,7 @@
 
 					<h:outputText value="#{msgs.title}" />
 					<p:inputText id="name" value="#{projectsBean.project.title}"
-						required="true" requiredMessage="#{msgs.name}: #{msgs.emptyValue}"
+						required="true" requiredMessage="#{msgs.title}: #{msgs.emptyValue}"
 						style="width: 250px;" />
 
 					<h:outputText value="#{msgs.description}" />
@@ -99,7 +99,7 @@
 				<center>
 					<p:commandButton value="#{msgs.edit}" title="#{msgs.edit}"
 						actionListener="#{projectsBean.saveOrUpdateProject()}"
-						update="@form projectDataTableForm growl"
+						update="@form projectDataTableForm:projectDataTable growl"
 						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('editProject').hide();"
 						ignoreAutoUpdate="true" process="@form" />
 				</center>

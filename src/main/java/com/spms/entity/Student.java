@@ -11,6 +11,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.spms.entity.sec.SystemUser;
 
@@ -54,6 +55,7 @@ public class Student extends SystemUser implements Serializable {
 		this.course = course;
 	}
 
+	@XmlTransient
 	public Project getProject() {
 		return project;
 	}

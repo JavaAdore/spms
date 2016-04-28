@@ -15,6 +15,7 @@ import com.spms.entity.Project;
 import com.spms.entity.ProjectTopic;
 import com.spms.entity.Supervisor;
 import com.spms.service.ProjectService;
+import com.spms.service.SupervisorService;
 
 @ManagedBean
 @ViewScoped
@@ -33,6 +34,9 @@ public class ProjectsBean implements Serializable {
 
 	@EJB
 	private ProjectService projectService;
+	
+	@EJB
+	private SupervisorService supervisorService;
 
 	private Project project;
 
@@ -44,14 +48,11 @@ public class ProjectsBean implements Serializable {
 
 	private void loadProjectTopics() {
 		projectTopics = projectService.getAllProjectTopics();
-		
 	}
 
 	public void prepareNewProjectToCreate() {
-
 		project = new Project();
 		project.setSupervisor(supervisor);
-
 	}
 
 	public void saveOrUpdateProject() {
@@ -60,7 +61,6 @@ public class ProjectsBean implements Serializable {
 			if(project.getId()==null){
 			project = projectService.create(project);
 			
-
 			supervisorProjects.add(project);
 			}else
 			{

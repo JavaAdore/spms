@@ -3,6 +3,7 @@ package com.spms.entity;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -10,6 +11,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @NamedQueries({ @NamedQuery(name = "Project.findAll", query = "SELECT model FROM Project model"),
@@ -30,7 +32,7 @@ public class Project implements Serializable {
 	private String description;
 	private String requiredSkills;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Supervisor supervisor;
 	
 	@ManyToOne
@@ -73,6 +75,7 @@ public class Project implements Serializable {
 		this.requiredSkills = requiredSkills;
 	}
 	
+	@XmlTransient
 	public Supervisor getSupervisor() {
 		return supervisor;
 	}
@@ -80,6 +83,7 @@ public class Project implements Serializable {
 	public void setSupervisor(Supervisor supervisor) {
 		this.supervisor = supervisor;
 	}
+	@XmlTransient
 	public ProjectTopic getProjectTopic() {
 		return projectTopic;
 	}

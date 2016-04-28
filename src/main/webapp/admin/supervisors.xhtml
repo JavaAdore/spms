@@ -20,10 +20,10 @@
 		<ui:include src="edit.xhtml" />
 	
 		<p:dialog dynamic="true" id="supervisorProjectsDialog" header="Projects" widgetVar="supervisorProjectsDialogWidget" modal="true" 
-			showEffect="fade" hideEffect="fade" resizable="false" style="width: 40%;">
+			showEffect="fade" hideEffect="fade" resizable="false" width="93%">
 			<h:form id="supervisorProjectsForm">
 				<p:dataTable id="supervisorProjectsDataTable" value="#{supervisorManagerView.selectedSupervisor.prjects}" var="project" emptyMessage="#{msgs.noResultsFound}" rows="10" 
-					paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" style="width: 93%">
+					paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" >
 					<f:facet name="header" >
 						<h:outputText value="Projects" />
 					</f:facet>
@@ -72,8 +72,8 @@
 			</p:column>
 			<p:column headerText="Projects" >
 				<center>
-					<p:commandLink value="#{supervisor.prjects.size()}" actionListener="#{supervisorManagerView.setSelectedSupervisor(supervisor)}" oncomplete="PF('supervisorProjectsDialogWidget').show()"
-						update="supervisorProjectsDialog" />
+					<p:commandLink value="#{empty supervisor.prjects.size() ? 0 : supervisor.prjects.size() }" actionListener="#{supervisorManagerView.setSelectedSupervisor(supervisor)}" oncomplete="PF('supervisorProjectsDialogWidget').show()"
+						update="supervisorProjectsForm" />
 				</center>
 			</p:column>
 					

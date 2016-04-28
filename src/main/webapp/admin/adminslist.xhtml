@@ -34,7 +34,7 @@
 			</f:facet>
 			<center>
 				<p:commandButton id="deleteButton" icon="ui-icon-trash" title="#{msgs.delete}" actionListener="#{adminManagerView.setSelectedAdmin(admin)}"
- 					oncomplete="PF('deleteAdminDialogWidget').show()" update="deleteAdminDialog" />
+ 					oncomplete="PF('deleteAdminDialogWidget').show()" update="deleteAdminDialog" rendered="#{sessionScope.currentUser.id != admin.id}"/>
 			</center>
 		</p:column>
 				

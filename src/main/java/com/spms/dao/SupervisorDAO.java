@@ -1,11 +1,14 @@
-package com.spms.service;
+package com.spms.dao;
 
 import java.util.List;
+
+import javax.ejb.Local;
 
 import com.spms.entity.StudentProjectStatus;
 import com.spms.entity.Supervisor;
 
-public interface SupervisorService {
+@Local
+public interface SupervisorDAO {
 
 	Supervisor create(Supervisor supervisor);
 
@@ -26,5 +29,5 @@ public interface SupervisorService {
 	StudentProjectStatus findStudentProjectStatus(Integer  id );
 	
 	void refershSupervisor(Supervisor supervisor);
-	
+
 }

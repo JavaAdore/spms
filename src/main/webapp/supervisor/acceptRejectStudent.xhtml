@@ -19,7 +19,7 @@
 	<ui:define name="content">
 		<h:form>
 			<p:dataTable value="#{projectJoinRequestsBean.joinRequests}"
-				var="joinRequest">
+				var="joinRequest" style="width: 93%">
 				<p:column headerText="project">
 					<p:outputLabel value="#{joinRequest.project.title}" />
 				</p:column>
