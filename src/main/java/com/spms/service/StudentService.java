@@ -25,7 +25,7 @@ public interface StudentService {
 
 	StudentProject getStudentProject(Student student);
 
-	void save(StudentProject studentProject) throws StudentAlreadyAssignedToProjectException;
+	StudentProject save(StudentProject studentProject) throws StudentAlreadyAssignedToProjectException;
 
 	List<StudentProject> getAllSuggestedProjectForSupervisor(Supervisor student);
 

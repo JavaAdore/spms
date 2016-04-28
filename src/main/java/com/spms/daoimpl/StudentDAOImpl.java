@@ -26,37 +26,40 @@ public class StudentDAOImpl implements StudentDAO {
 
 	@Override
 	public StudentProject getStudentProject(Student student) {
-		Query query = em.createQuery("select x from StudentProject x where x.student =:student");
+		Query query = em
+				.createQuery("select x from StudentProject x where x.student =:student");
 		query.setParameter("student", student);
 		List queryResult = query.getResultList();
-		if(queryResult.isEmpty()==false)
-		{
-			return (StudentProject)queryResult.get(0);
+		if (queryResult.isEmpty() == false) {
+			return (StudentProject) queryResult.get(0);
 		}
 		return null;
 	}
 
 	@Override
-	public void save(StudentProject studentProject) {
-		
+	public StudentProject save(StudentProject studentProject) {
+
 		em.merge(studentProject);
+		return studentProject;  
 	}
 
 	@Override
 	public void saveOrUpdateStudentProjectStatus(
 			StudentProjectStatus studentProjectStatus) {
 		em.merge(studentProjectStatus);
-		
+
 	}
 
 	@Override
 	public List<StudentProject> getAllSuggestedProjectForSupervisor(
 			Supervisor supervisor) {
-		Query query = em.createQuery("select x from StudentProject x where x.suggestedSupervisor =:suggestedSupervisor and x.status <> :approved");
-		query.setParameter("approved", StudentProjectStatus.ACCEPTED_BY_SUPERVISOR);
+		Query query = em
+				.createQuery("select x from StudentProject x where x.suggestedSupervisor =:suggestedSupervisor and x.status <> :approved");
+		query.setParameter("approved",
+				StudentProjectStatus.ACCEPTED_BY_SUPERVISOR);
 		query.setParameter("suggestedSupervisor", supervisor);
 		return query.getResultList();
-	} 
+	}
 
 	@Override
 	public void setStudentProject(Student student, Integer id) {
@@ -78,11 +81,11 @@ public class StudentDAOImpl implements StudentDAO {
 
 	@Override
 	public JoinProjectRequest getStudentProjectRequest(Student student) {
-		Query query = em.createQuery("select x from JoinProjectRequest x where x.student =:student");
+		Query query = em
+				.createQuery("select x from JoinProjectRequest x where x.student =:student");
 		query.setParameter("student", student);
 		List queryResult = query.getResultList();
-		if(queryResult.isEmpty()==false)
-		{
+		if (queryResult.isEmpty() == false) {
 			return (JoinProjectRequest) queryResult.get(0);
 		}
 		return null;
@@ -90,11 +93,7 @@ public class StudentDAOImpl implements StudentDAO {
 
 	@Override
 	public void updateStudent(Student student) {
-		em.merge(student);		
+		em.merge(student);
 	}
-	
-	
-	
-	
 
 }

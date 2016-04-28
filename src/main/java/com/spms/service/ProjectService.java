@@ -36,5 +36,7 @@ public interface ProjectService {
 
 	ProjectTopic findProjectTopic(Integer integer);
 
+	List<ProjectTopic> getAllProjectTopics();
+
 
 }

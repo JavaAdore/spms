@@ -12,10 +12,12 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import com.spms.entity.ProjectTopic;
 import com.spms.entity.Student;
 import com.spms.entity.StudentProject;
 import com.spms.entity.StudentProjectStatus;
 import com.spms.entity.Supervisor;
+import com.spms.service.ProjectService;
 import com.spms.service.StudentService;
 import com.spms.service.SupervisorService;
 
@@ -31,6 +33,8 @@ public class StudentProjectBean implements Serializable {
 	private StudentProject studentProject;
 
 	private List<Supervisor> supervisors;
+	
+	private List<ProjectTopic>projectTopics;
 
 	@EJB
 	StudentService studentService;
@@ -38,7 +42,10 @@ public class StudentProjectBean implements Serializable {
 	@EJB
 	SupervisorService supervisorService;
 
-
+	
+	@EJB
+	private ProjectService projectService;
+	
 	Student student = (Student) ((HttpSession) FacesContext
 			.getCurrentInstance().getExternalContext().getSession(true))
 			.getAttribute("currentUser");
@@ -53,6 +60,8 @@ public class StudentProjectBean implements Serializable {
 			studentProject = tempStudentProject;
 		}
 		
+		projectTopics = projectService.getAllProjectTopics();
+		
 	}
 
 
@@ -66,7 +75,7 @@ public class StudentProjectBean implements Serializable {
 	public void saveStudentProejct() {
 
 		try {
-			studentService.save(studentProject);
+			studentProject = 	studentService.save(studentProject);
 
 			FacesContext
 					.getCurrentInstance()
@@ -100,6 +109,16 @@ public class StudentProjectBean implements Serializable {
 
 	public void setSupervisors(List<Supervisor> supervisors) {
 		this.supervisors = supervisors;
+	}
+
+
+	public List<ProjectTopic> getProjectTopics() {
+		return projectTopics;
+	}
+
+
+	public void setProjectTopics(List<ProjectTopic> projectTopics) {
+		this.projectTopics = projectTopics;
 	}
 
 	

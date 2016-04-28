@@ -17,7 +17,7 @@ public interface StudentDAO {
 
 	StudentProject getStudentProject(Student student);
 
-	void save(StudentProject studentProject);
+	StudentProject save(StudentProject studentProject);
 
 	void saveOrUpdateStudentProjectStatus(
 			StudentProjectStatus studentProjectStatus);

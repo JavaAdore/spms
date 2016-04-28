@@ -32,6 +32,10 @@ public class Project implements Serializable {
 	
 	@ManyToOne
 	private Supervisor supervisor;
+	
+	@ManyToOne
+	private ProjectTopic projectTopic;
+	
 	public Project(){}
 	public Project(Integer id) {
 		
@@ -75,6 +79,12 @@ public class Project implements Serializable {
 	
 	public void setSupervisor(Supervisor supervisor) {
 		this.supervisor = supervisor;
+	}
+	public ProjectTopic getProjectTopic() {
+		return projectTopic;
+	}
+	public void setProjectTopic(ProjectTopic projectTopic) {
+		this.projectTopic = projectTopic;
 	}
 
 }

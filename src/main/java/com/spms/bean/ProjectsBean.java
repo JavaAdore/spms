@@ -12,6 +12,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import com.spms.entity.Project;
+import com.spms.entity.ProjectTopic;
 import com.spms.entity.Supervisor;
 import com.spms.service.ProjectService;
 
@@ -23,6 +24,9 @@ public class ProjectsBean implements Serializable {
 
 	private List<Project> supervisorProjects;
 
+	private List<ProjectTopic>projectTopics;
+	
+	
 	Supervisor supervisor = (Supervisor) ((HttpSession) FacesContext
 			.getCurrentInstance().getExternalContext().getSession(true))
 			.getAttribute("currentUser");
@@ -35,7 +39,12 @@ public class ProjectsBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		refreshInstructorProjectsList();
+		loadProjectTopics();
+	}
 
+	private void loadProjectTopics() {
+		projectTopics = projectService.getAllProjectTopics();
+		
 	}
 
 	public void prepareNewProjectToCreate() {
@@ -93,6 +102,14 @@ public class ProjectsBean implements Serializable {
 
 	public void setProject(Project project) {
 		this.project = project;
+	}
+
+	public List<ProjectTopic> getProjectTopics() {
+		return projectTopics;
+	}
+
+	public void setProjectTopics(List<ProjectTopic> projectTopics) {
+		this.projectTopics = projectTopics;
 	}
 
 }
